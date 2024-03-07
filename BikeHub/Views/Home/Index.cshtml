@@ -1,1 +1,52 @@
-﻿
+﻿@model IEnumerable<Customer>
+
+<div class="row">
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>StudentID</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                    <th>Email</th>
+                    <th>CampusName</th>
+                    <th>PhoneNumber</th>
+                    <th>EmergencyContactName</th>
+                    <th>EmergencyContactNum</th>
+                    <th>TypeOfCustomer</th>
+                    <th>TypeOfRider</th>
+                    <th>TAndCAgreement</th>
+                    <th>EmailSubscription</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Model != null)
+                {
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.StudentId</td>
+                            <td>@item.FirstName</td>
+                            <td>@item.LastName</td>
+                            <td>@item.Email</td>
+                            <td>@item.CampusName</td>
+                            <td>@item.PhoneNumber</td>
+                            <td>@item.EmergencyContactName</td>
+                            <td>@item.EmergencyContactNum</td>
+                            <td>@item.TypeOfCustomer</td>
+                            <td>@item.TypeOfRider</td>
+                            <td>@item.TAndCAgreement</td>
+                            <td>@item.EmailSubscription</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+
+                    <p>no data available</p>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

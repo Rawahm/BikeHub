@@ -1,3 +1,4 @@
+using BikeHub.Data;
 using BikeHub.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -7,15 +8,20 @@ namespace BikeHub.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly BikeHubDBContext _db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, BikeHubDBContext db)
         {
+            _db = db;
+
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            return View();
+            IEnumerable<Customer> CustomerDetails = _db.CustomerDetails.ToList();
+
+            return View(CustomerDetails);
         }
 
         public IActionResult Privacy()
