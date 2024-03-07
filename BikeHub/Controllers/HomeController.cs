@@ -19,9 +19,9 @@ namespace BikeHub.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Customer> CustomerDetails = _db.CustomerDetails.ToList();
+            IEnumerable<Customer> CustomerInformation = _db.CustomerInformation.ToList();
 
-            return View(CustomerDetails);
+            return View(CustomerInformation);
         }
 
         public IActionResult Privacy()
