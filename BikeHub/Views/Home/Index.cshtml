@@ -1,52 +1,149 @@
-﻿@model IEnumerable<Customer>
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
 
-<div class="row">
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>StudentID</th>
-                    <th>FirstName</th>
-                    <th>LastName</th>
-                    <th>Email</th>
-                    <th>CampusName</th>
-                    <th>PhoneNumber</th>
-                    <th>EmergencyContactName</th>
-                    <th>EmergencyContactNum</th>
-                    <th>TypeOfCustomer</th>
-                    <th>TypeOfRider</th>
-                    <th>TAndCAgreement</th>
-                    <th>EmailSubscription</th>
-                </tr>
-            </thead>
 
-            <tbody>
-                @if (Model != null)
-                {
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@item.StudentId</td>
-                            <td>@item.FirstName</td>
-                            <td>@item.LastName</td>
-                            <td>@item.Email</td>
-                            <td>@item.CampusName</td>
-                            <td>@item.PhoneNumber</td>
-                            <td>@item.EmergencyContactName</td>
-                            <td>@item.EmergencyContactNum</td>
-                            <td>@item.TypeOfCustomer</td>
-                            <td>@item.TypeOfRider</td>
-                            <td>@item.TAndCAgreement</td>
-                            <td>@item.EmailSubscription</td>
-                        </tr>
-                    }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bike Hub</title>
+    <style>
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 2px;
+        }
+
+
+
+        header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+            nav ul li {
+                display: inline;
+                margin-right: 20px;
+            }
+
+                nav ul li a {
+                    color: #2345609a;
+                    text-decoration: none;
                 }
-                else
-                {
 
-                    <p>no data available</p>
-                }
-            </tbody>
-        </table>
-    </div>
-</div>
+        section {
+            padding: 40px 0;
+        }
+
+        h2 {
+            font-size: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #33bcd3;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn:hover {
+                background-color: #555;
+            }
+
+        /* Form Styling */
+        input[type="text"],
+        input[type="email"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #9cbcdc;
+            border-radius: 5px;
+        }
+
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #33adf3;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+            button[type="submit"]:hover {
+                background-color: #555cdf;
+            }
+
+        footer {
+            background-color: #33f3;
+            color: #0000fb;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Bike Hub</h1>
+            <nav>
+                <ul>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="banner">
+        <div class="container">
+            <h2>Welcome to Bike Hub</h2>
+            <p>Your one-stop destination for all things cycling</p>
+            <a href="#about" class="btn">Learn More</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>Abou us Section.</p>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <ul>
+                <li>Bike Rentals</li>
+                <li>Bike Repairs</li>
+
+            </ul>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form>
+                <input type="text" placeholder="Your Name">
+                <input type="email" placeholder="Your Email">
+                <textarea placeholder="Your Message"></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+</body>
+</html>

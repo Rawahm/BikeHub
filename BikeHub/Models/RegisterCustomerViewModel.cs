@@ -2,8 +2,9 @@
 
 namespace BikeHub.Models
 {
-    public class Customer
+    public class RegisterCustomerViewModel
     {
+
         [Key]
         public int StudentId { get; set; }
         public string FirstName { get; set; }
@@ -17,6 +18,5 @@ namespace BikeHub.Models
         public string TypeOfRider { get; set; }
         public bool TAndCAgreement { get; set; }
         public bool EmailSubscription { get; set; }
-
     }
 }

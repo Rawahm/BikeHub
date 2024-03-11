@@ -1,0 +1,156 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model BikeHub.Models.RegisterCustomerViewModel
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+       
+
+        form {
+            max-width: 500px;
+            padding: 40px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #333;
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="%23333"><path d="M7 10l5 5 5-5H7z"/></svg>');
+            background-repeat: no-repeat;
+            background-position-x: 97%;
+            background-position-y: 50%;
+            padding-right: 40px;
+        }
+
+        button[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+            button[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+
+        /* Style for checkboxes */
+        input[type="checkbox"] {
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+
+        .checkbox-label {
+            display: inline-block;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <form id="customerForm" method="post">
+        <h2>Register</h2>
+                <div class="form-group">
+            <label for="CustomerId">Customer ID:</label>
+            <input type="text" id="CustomerId" name="StudentId" asp-for="StudentId">
+        </div>
+        <div class="form-group">
+            <label for="FirstName">First Name:</label>
+            <input type="text" id="FirstName" name="FirstName" asp-for="FirstName">
+        </div>
+        <div class="form-group">
+            <label for="LastName">Last Name:</label>
+            <input type="text" id="LastName" name="LastName" asp-for="LastName">
+        </div>
+        <div class="form-group">
+            <label for="Email">Email:</label>
+            <input type="email" id="Email" name="Email" asp-for="Email">
+        </div>
+        <div class="form-group">
+            <label for="CampusName">Campus Name:</label>
+            <select id="CampusName" name="CampusName" asp-for="CampusName">
+                <option value="HMS">HMS</option>
+                <option value="Davis">Davis</option>
+                <option value="Both HMS & Davis">Both HMS & Davis</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="PhoneNumber">Phone Number:</label>
+            <input type="tel" id="PhoneNumber" name="PhoneNumber" asp-for="PhoneNumber">
+        </div>
+        <div class="form-group">
+            <label for="EmergencyContactName">Emergency Contact Name:</label>
+            <input type="text" id="EmergencyContactName" name="EmergencyContactName" asp-for="EmergencyContactName">
+        </div>
+        <div class="form-group">
+            <label for="EmergencyContactNum">Emergency Contact Number:</label>
+            <input type="tel" id="EmergencyContactNum" name="EmergencyContactNum" asp-for="EmergencyContactNum">
+        </div>
+        <div class="form-group">
+            <label for="TypeOfCustomer">Type of Customer:</label>
+            <select id="TypeOfCustomer" name="TypeOfCustomer" asp-for="TypeOfCustomer">
+                <option value="Customer">Student</option>
+                <option value="Staff">Staff</option>
+                <option value="Faculty">Faculty</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="TypeOfRider">Type of Rider:</label>
+            <input type="text" id="TypeOfRider" name="TypeOfRider" asp-for="TypeOfRider">
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="TAndCAgreement" name="TAndCAgreement" asp-for="TAndCAgreement">
+            <label class="checkbox-label" for="TAndCAgreement">I agree to the terms and conditions</label>
+        </div>
+        <div class="form-group">
+            <input type="checkbox" id="EmailSubscription" name="EmailSubscription" asp-for="EmailSubscription">
+            <label class="checkbox-label" for="EmailSubscription">Subscribe to email notifications</label>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
