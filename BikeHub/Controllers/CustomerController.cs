@@ -21,24 +21,33 @@ namespace BikeHub.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterCustomerViewModel viewModel)
         {
-            var customer = new Customer
+            if (ModelState.IsValid)
             {
-                StudentId = viewModel.StudentId,
-                FirstName = viewModel.FirstName,
-                LastName = viewModel.LastName,
-                PhoneNumber = viewModel.PhoneNumber,
-                Email = viewModel.Email,
-                CampusName = viewModel.CampusName,
-                EmergencyContactName = viewModel.EmergencyContactName,
-                EmergencyContactNum = viewModel.EmergencyContactNum,
-                TypeOfCustomer = viewModel.TypeOfCustomer,
-                TypeOfRider = viewModel.TypeOfRider,
-                TAndCAgreement = viewModel.TAndCAgreement,
-                EmailSubscription = viewModel.EmailSubscription
-            };
-            await dbContext.CustomerInformation.AddAsync(customer);
-            await dbContext.SaveChangesAsync();
-            return View();
+                var customer = new Customer
+                {
+                    StudentId = viewModel.StudentId,
+                    FirstName = viewModel.FirstName,
+                    LastName = viewModel.LastName,
+                    PhoneNumber = viewModel.PhoneNumber,
+                    Email = viewModel.Email,
+                    CampusName = viewModel.CampusName,
+                    EmergencyContactName = viewModel.EmergencyContactName,
+                    EmergencyContactNum = viewModel.EmergencyContactNum,
+                    TypeOfCustomer = viewModel.TypeOfCustomer,
+                    TypeOfRider = viewModel.TypeOfRider,
+                    TAndCAgreement = viewModel.TAndCAgreement,
+                    EmailSubscription = viewModel.EmailSubscription
+                };
+
+                await dbContext.CustomerInformation.AddAsync(customer);
+                await dbContext.SaveChangesAsync();
+
+                // Redirect to a success page or take appropriate action
+                return RedirectToAction("RegisterSuccess");
+                //Create a view for RegisterSuccess here Include Get request
+            }
+            // If model state is not valid, return the view with validation errors
+            return View(viewModel);
         }
         [HttpGet]
         public async Task<IActionResult> AdminList()
@@ -47,6 +56,12 @@ namespace BikeHub.Controllers
             return View(customers);
 
 
+        }
+        // GET: /Customer/RegisterSuccess
+        [HttpGet]
+        public IActionResult RegisterSuccess()
+        {
+            return View();
         }
     }
 }
