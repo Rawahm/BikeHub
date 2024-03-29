@@ -1,0 +1,61 @@
+﻿@model IEnumerable<BikeHub.Models.Rental>
+
+@{
+    ViewData["Title"] = "Rental List";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Customer Name</th>
+            <th>Email</th>
+            <th>Bike Rented</th>
+            <th>Date Rented</th>
+            <th>Lock Rented</th>
+            <th>Basket Rented</th>
+            <th>Key Rented</th>
+            <th>Lights</th>
+            <th>Due Date</th>
+            <th>Date Returned</th>
+            <th>Duration</th>
+            <th>Amount</th>
+            <th>Paid</th>
+            <th>Payment Date</th>
+            <th>KMs Ridden</th>
+            <th>Method of Travel</th>
+            <th>Days Late</th>
+            <th>Banned</th>
+            <th>Notes</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var rental in Model)
+        {
+            <tr>
+                <td>@rental.Id</td>
+                <td>@rental.Name</td>
+                <td>@rental.Email</td>
+                <td>@rental.BikeRented</td>
+                <td>@rental.DateRented.ToShortDateString()</td>
+                <td>@rental.LockRented</td>
+                <td>@rental.BasketRented</td>
+                <td>@rental.KeyRented</td>
+                <td>@rental.Lights</td>
+                <td>@rental.DueDate.ToShortDateString()</td>
+                <td>@(rental.DateReturned.ToShortDateString())</td>
+                <td>@rental.Duration</td>
+                <td>@rental.Amount</td>
+                <td>@(rental.Paid ? "Yes" : "No")</td>
+                <td>@(rental.PaymentDate.ToString())</td>
+                <td>@rental.KMSRidden</td>
+                <td>@rental.MethodOfTravel</td>
+                <td>@rental.DaysLate</td>
+                <td>@(rental.Banned ? "Yes" : "No")</td>
+                <td>@rental.Notes</td>
+            </tr>
+        }
+    </tbody>
+</table>

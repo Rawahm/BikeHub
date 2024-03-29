@@ -10,5 +10,8 @@ namespace BikeHub.Data
         }
 
         public DbSet<Customer> CustomerInformation { get; set; }
+        public DbSet<Rental> Rental { get; set;}
+       
+
     }
 }

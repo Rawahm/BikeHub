@@ -18,5 +18,7 @@ namespace BikeHub.Models
         public string TypeOfRider { get; set; }
         public bool TAndCAgreement { get; set; }
         public bool EmailSubscription { get; set; }
+        public ICollection<Rental> Rentals { get; set; }
+
     }
 }
