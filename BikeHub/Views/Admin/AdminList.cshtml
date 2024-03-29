@@ -1,0 +1,81 @@
+﻿@model List<BikeHub.Models.Customer>
+@{
+    ViewData["Title"] = "Search Customer";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card mb-3">
+                <div class="card-header bg-primary text-white">
+                    Search Customer
+                </div>
+                <div class="card-body">
+                    @if (TempData["Message"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @TempData["Message"]
+                        </div>
+                    }
+                    <form asp-action="SearchCustomer" method="post">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Enter Customer ID" aria-label="Enter Customer ID" aria-describedby="button-search" name="customerId" required>
+                            <button class="btn btn-primary" type="submit" id="button-search">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    All Customers Registered
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Student ID</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Email</th>
+                                    <th>Campus Name</th>
+                                    <th>Phone Number</th>
+                                    <th>Emergency Contact Name</th>
+                                    <th>Emergency Contact Number</th>
+                                    <th>Type of Customer</th>
+                                    <th>Type of Rider</th>
+                                    <th>Terms and Conditions Agreement</th>
+                                    <th>Email Subscription</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var customer in Model)
+                                {
+                                    <tr>
+                                        <td>@customer.StudentId</td>
+                                        <td>@customer.FirstName</td>
+                                        <td>@customer.LastName</td>
+                                        <td>@customer.Email</td>
+                                        <td>@customer.CampusName</td>
+                                        <td>@customer.PhoneNumber</td>
+                                        <td>@customer.EmergencyContactName</td>
+                                        <td>@customer.EmergencyContactNum</td>
+                                        <td>@customer.TypeOfCustomer</td>
+                                        <td>@customer.TypeOfRider</td>
+                                        <td>@customer.TAndCAgreement</td>
+                                        <td>@customer.EmailSubscription</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

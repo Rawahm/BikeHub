@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Search Customer";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <h5 class="card-header">Search Customer</h5>
+                <div class="card-body">
+                    @if (TempData["Message"] != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @TempData["Message"]
+                        </div>
+                    }
+                    <form asp-action="SearchCustomer" method="post">
+                        <div class="mb-3">
+                            <label for="customerId" class="form-label">Customer ID:</label>
+                            <input type="text" class="form-control" id="customerId" name="customerId" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
