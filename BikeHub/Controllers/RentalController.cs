@@ -170,6 +170,32 @@ namespace BikeHub.Controllers
 
             return View(viewModel);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteRental(int id)
+        {
+            var rental = await dbContext.Rental.FindAsync(id);
+            if (rental == null)
+            {
+                return NotFound();
+            }
+            // Store the customer ID associated with this rental
+
+            ViewBag.CustomerId = rental.StudentId;
+
+
+
+            dbContext.Rental.Remove(rental);
+            await dbContext.SaveChangesAsync();
+            // Redirect to the details page after deletion
+            return View();
+        }
+        // When delte the rental record redirect to success page 
+        [HttpGet]
+        public IActionResult DeleteSuccess()
+        {
+            return View();
+        }
 
     }
 }
