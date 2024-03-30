@@ -105,7 +105,6 @@ namespace BikeHub.Controllers
            // var customer = await dbContext.CustomerInformation.FindAsync(keyValues: model.Customer.StudentId);
 
             // Create a new Rental entity and populate its properties
-#pragma warning disable CS8629 // Nullable value type may be null.
             var rental = new Rental
             {
                 // Set the Customer property to the retrieved customer
