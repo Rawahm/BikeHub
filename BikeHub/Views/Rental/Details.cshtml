@@ -1,0 +1,149 @@
+﻿@model BikeHub.Models.CustomerRentalViewModel
+
+@{
+    ViewData["Title"] = "Customer Details";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <style>
+       
+        .container {
+            max-width: 90%;
+            margin: 2px auto;
+            padding:2px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(1, 1, 1,1 .1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #007bff;
+        }
+        h3{
+            color:#cc04de
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #00fff0;
+        }
+
+        th {
+            background-color: #00acfb;
+        }
+
+        tbody tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        p {
+            margin: 5px 10px;
+        }
+
+        .no-rental {
+            font-style: italic;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>@ViewData["Title"]</h1>
+
+        <div class="card">
+            <h3>Customer Information:</h3>
+            <p>Customer ID: @Model.Customer.StudentId</p>
+            <p>First Name: @Model.Customer.FirstName</p>
+            <p>Last Name: @Model.Customer.LastName</p>
+            <p>Email: @Model.Customer.Email</p>
+            <p>Campus Name: @Model.Customer.CampusName</p>
+            <p>Phone Number: @Model.Customer.PhoneNumber</p>
+            <p>Emergency Contact Name: @Model.Customer.EmergencyContactName</p>
+            <p>Emergency Contact Number: @Model.Customer.EmergencyContactNum</p>
+            <p>Type of Customer: @Model.Customer.TypeOfCustomer</p>
+            <p>Type of Rider: @Model.Customer.TypeOfRider</p>
+            <p>Terms and Conditions Agreement: @Model.Customer.TAndCAgreement</p>
+            <p>Email Subscription: @Model.Customer.EmailSubscription</p>
+        </div>
+
+        @if (Model.Rentals != null && Model.Rentals.Any())
+        {
+            <div class="">
+                <h3>Rental Information:</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Rental ID</th>
+                            <th>Bike Rented</th>
+                            <th>Date Rented</th>
+                            <th>Due Date</th>
+                            <th>Lock Rented</th>
+                            <th>Basket Rented</th>
+                            <th>Key Rented</th>
+                            <th>Lights</th>
+                            <th>Duration</th>
+                            <th>Amount</th>
+                            <th>KMs Ridden</th>
+                            <th>Travelling Method</th>
+                            <th>Payment Date</th>
+                            <th>Date Returned</th>
+                            <th>Banned</th>
+                            <th>Paid</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var rental in Model.Rentals)
+                        {
+                            <tr>
+                                <td>@rental.Id</td>
+                                <td>@rental.BikeRented</td>
+                                <td>@rental.DateRented.ToShortDateString()</td>
+                                <td>@rental.DueDate.ToShortDateString()</td>
+                                <td>@rental.LockRented</td>
+                                <td>@rental.BasketRented</td>
+                                <td>@rental.KeyRented</td>
+                                <td>@rental.Lights</td>
+                                <td>@rental.Duration</td>
+                                <td>@rental.Amount</td>
+                                <td>@rental.KMSRidden</td>
+                                <td>@rental.MethodOfTravel</td>
+                                <td>@rental.PaymentDate?.ToShortDateString()</td>
+                                <td>@rental.DateReturned.ToShortDateString()</td>
+                                <td>@rental.Banned</td>
+                                <td>@rental.Paid</td>
+                                <td>@rental.Notes</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <h1>
+            <p class="no-rental" style="color: #ad0000;">No rental information available.</p>
+            </h1>
+        }
+    </div>
+</body>
+</html>

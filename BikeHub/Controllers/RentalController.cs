@@ -1,6 +1,7 @@
 ﻿using BikeHub.Data;
 using BikeHub.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BikeHub.Controllers
 {
@@ -145,6 +146,27 @@ namespace BikeHub.Controllers
         {
             var rentals = dbContext.Rental.ToList();
             return View(rentals);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int customerId)
+        {
+            var customerWithRental = await dbContext.CustomerInformation
+                .Include(c => c.RentalDetails) // Include rentals for the customer
+                .FirstOrDefaultAsync(c => c.StudentId == customerId);
+
+            if (customerWithRental == null)
+            {
+                return NotFound();
+            }
+
+            var viewModel = new CustomerRentalViewModel
+            {
+                Customer = customerWithRental,
+                Rentals = customerWithRental.RentalDetails.ToList()
+            };
+
+            return View(viewModel);
         }
 
     }
