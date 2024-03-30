@@ -2,6 +2,11 @@
 using BikeHub.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+/*
+ * @Author : Rawah Almesri 
+ * 2024-03-21
+ */
+
 
 namespace BikeHub.Controllers
 {
@@ -130,8 +135,6 @@ namespace BikeHub.Controllers
                 Notes = model.Notes,
                 MethodOfTravel = model.MethodOfTravel
             };
-#pragma warning restore CS8629 // Nullable value type may be null.
-
             // Add the rental to the context and save changes
             dbContext.Rental.Add(rental);
             await dbContext.SaveChangesAsync();
