@@ -38,8 +38,9 @@ namespace BikeHub.Controllers
             };
             return View(rentalViewModel);
         }
-        /* This the method shown during the sprint 2. 
-         * A new create method will be added to validate the saving of the records without any form validation
+        //This the method shown during the sprint 2. 
+         // This create method  added to validate the saving of the records Another commented create method
+         // without any form validation 
         public async Task<IActionResult> Create(RentalViewModel model)
         {
             try
@@ -57,6 +58,7 @@ namespace BikeHub.Controllers
                 {
                     // Set the Customer property to the retrieved customer
                     Customer = customer,
+                    StudentId = model.Customer.StudentId,
                     Name = model.Name,
                     Email = model.Email,
                     BikeRented = model.BikeRented,
@@ -79,7 +81,7 @@ namespace BikeHub.Controllers
                 };
 
                 // Add the rental to the context and save changes
-                dbContext.RentalDetails.Add(rental);
+                dbContext.Rental.Add(rental);
                 await dbContext.SaveChangesAsync();
 
                 // Redirect to the Index page : /Rental/Index with the Get request.....
@@ -93,9 +95,9 @@ namespace BikeHub.Controllers
             }
         }
 
-        */ // End of the first version of the create method..
+         // End of the first version of the create method..
 
-        // 
+        /*
         public async Task<IActionResult> Create(RentalViewModel model)
         {
             // Retrieve the customer from the database using the provided CustomerId
@@ -137,7 +139,7 @@ namespace BikeHub.Controllers
             // Redirect to the Index page : /Rental/Index with the Get request.....
             return RedirectToAction("Index");
         }
-
+        */
         [HttpGet]
         public IActionResult Index()
         {

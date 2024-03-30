@@ -3,6 +3,42 @@
 @{
     ViewData["Title"] = "Rental List";
 }
+<head>
+    <style>
+        /* Custom CSS for Rental List View */
+        h1 {
+            color: rebeccapurple; /* Dark gray color for headings */
+            text-align: center; /* Center-align the heading */
+        }
+
+        .table {
+            width: 100%; /* Make the table full-width */
+        }
+
+            .table th,
+            .table td {
+                padding: 8px; /* Add padding to table cells */
+            }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f9f9f9; /* Alternate row background color */
+        }
+
+        .table-bordered {
+            border: 1px solid #ddd; /* Add borders to table */
+        }
+        .table thead th {
+            background-color: #04f; /* Dark gray background color for table header */
+            color: #fff; /* White text color for table header */
+        }
+
+        .table-responsive {
+            overflow-x: auto; /* Add horizontal scroll bar if needed */
+        }
+
+    </style>
+</head>
+
 
 <h1>@ViewData["Title"]</h1>
 
@@ -10,6 +46,7 @@
     <thead>
         <tr>
             <th>Id</th>
+            <th>Customer ID</th>
             <th>Customer Name</th>
             <th>Email</th>
             <th>Bike Rented</th>
@@ -36,6 +73,7 @@
         {
             <tr>
                 <td>@rental.Id</td>
+                <td>@rental.StudentId</td>
                 <td>@rental.Name</td>
                 <td>@rental.Email</td>
                 <td>@rental.BikeRented</td>

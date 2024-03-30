@@ -5,6 +5,7 @@
 }
 <head>
     <style>
+
         form {
             max-width: 500px;
             padding: 40px;
@@ -107,10 +108,12 @@
                 <label for="customerId">Customer ID:</label>
                 <input type="text" class="form-control" id="customerId" asp-for="StudentId" name="customerId" readonly value="@Model.Customer.StudentId">
             </div>
-            <div class="form-group">
+            <!-- 
+                <div class="form-group">
                 <label for="customerId">Rental ID:</label>
                 <input type="text" class="form-control" id="customerId" asp-for="Id" name="customerId" >
             </div>
+            -->
             <div class="form-group">
                 <label for="name">Name:</label>
                 <input type="text" class="form-control" id="name" name="name" asp-for="Name" readonly value="@Model.Customer.FirstName @Model.Customer.LastName">
@@ -171,6 +174,11 @@
                 <label for="kmsRidden">KMs Ridden:</label>
                 <input type="number" class="form-control" id="kmsRidden" name="kmsRidden" asp-for="KMSRidden">
                 <span asp-validation-for="KMSRidden" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="basketRented">Travelling Method:</label>
+                <input type="text" class="form-control" id="basketRented" name="TravelMethod" asp-for="MethodOfTravel">
+                <span asp-validation-for="MethodOfTravel" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label for="dateRented">Payment Date:</label>
