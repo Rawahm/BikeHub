@@ -18,7 +18,7 @@ namespace BikeHub.Controllers
         {
             return View();
         }
-        /*
+
         [HttpPost]
         public async Task<IActionResult> Register(RegisterCustomerViewModel viewModel)
         {
@@ -43,17 +43,18 @@ namespace BikeHub.Controllers
                 await dbContext.CustomerInformation.AddAsync(customer);
                 await dbContext.SaveChangesAsync();
 
-                // Redirect to a success page or take appropriate action
+                // Redirect to a success page
                 return RedirectToAction("RegisterSuccess");
-                //Create a view for RegisterSuccess here Include Get request
             }
+
             // If model state is not valid, return the view with validation errors
             return View(viewModel);
         }
-        */
+
+
         /* For Testing purposes only 
          * This method has no if statement to validate the submitted info 
-         */ 
+         *
         public async Task<IActionResult> Register(RegisterCustomerViewModel viewModel)
         {
             var customer = new Customer
@@ -75,11 +76,12 @@ namespace BikeHub.Controllers
             await dbContext.CustomerInformation.AddAsync(customer);
             await dbContext.SaveChangesAsync();
 
-            // Redirect to a success page or take appropriate action
+            // Redirect to a success page    /Customer/RegisterSuccess
+
             return RedirectToAction("RegisterSuccess");
             
         }
-        
+        */
         [HttpGet]
         public async Task<IActionResult> AdminList()
         {
