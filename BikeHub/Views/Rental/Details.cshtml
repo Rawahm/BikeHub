@@ -106,6 +106,7 @@
                             <th>Travelling Method</th>
                             <th>Payment Date</th>
                             <th>Date Returned</th>
+                            <th>Days Late</th>
                             <th>Banned</th>
                             <th>Paid</th>
                             <th>Notes</th>
@@ -131,6 +132,7 @@
                                 <td>@rental.MethodOfTravel</td>
                                 <td>@rental.PaymentDate?.ToShortDateString()</td>
                                 <td>@rental.DateReturned.ToShortDateString()</td>
+                                <td>@rental.DaysLate</td>
                                 <td>@rental.Banned</td>
                                 <td>@rental.Paid</td>
                                 <td>@rental.Notes</td>

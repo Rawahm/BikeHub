@@ -129,12 +129,12 @@
             </div>
             <div class="form-group">
                 <label for="dateRented">Date Rented:</label>
-                <input type="date" class="form-control" id="dateRented" name="dateRented" asp-for="DateRented" value="@DateTime.Today.ToString("yyyy-MM-dd")">
+                <input type="date" class="form-control" id="dateRented" name="dateRented" asp-for="DateRented" value="@DateTime.Today.ToString("yyyy-MM-dd")" onchange="calculateDuration()">
                 <span asp-validation-for="DateRented" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label for="dueDate">Due Date:</label>
-                <input type="date" class="form-control" id="dueDate" name="dueDate" asp-for="DueDate" value="@DateTime.Today.ToString("yyyy-MM-dd")">
+                <input type="date" class="form-control" id="dueDate" name="dueDate" asp-for="DueDate" value="@DateTime.Today.ToString("yyyy-MM-dd")" onchange="calculateDuration()">
                 <span asp-validation-for="DueDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -187,9 +187,14 @@
             </div>
             <div class="form-group">
                 <label for="dateRented"> Date Returned:</label>
-                <input type="date" class="form-control" id="DateReturned" name="DateReturned" asp-for="DateReturned" value="@DateTime.Today.ToString("yyyy-MM-dd")">
+                <input type="date" class="form-control" id="dateReturned" name="dateReturned" asp-for="DateReturned" value="@DateTime.Today.ToString("yyyy-MM-dd")">
                 <span asp-validation-for="DateReturned" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label for="daysLate">Days Late:</label>
+                <input type="number"class="form-control" id="daysLate" name="daysLate" asp-for="DaysLate"  />
+            </div>
+
             <div class="form-group">
 
                 <input type="checkbox" id="banned" name="banned" asp-for="Banned">
@@ -206,6 +211,31 @@
                 <textarea class="form-control" id="notes" name="notes" rows="3" asp-for="Notes"></textarea>
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
+            <script>
+                // Calculate days late
+                document.getElementById('dateReturned').addEventListener('change', function () {
+                    var dateReturned = new Date(this.value);
+                    var dueDate = new Date(document.getElementById('dueDate').value);
+                    var daysLate = 0;
+                    if (dateReturned > dueDate) {
+                        daysLate = Math.floor((dateReturned - dueDate) / (1000 * 60 * 60 * 24));
+                    }
+                    document.getElementById('daysLate').value = daysLate;
+                });
+                // Function to calculate duration and then insert the valueof it to the input field
+                function calculateDuration() {
+                    // Get the dateRented and dueDate values from the input fields from the fform above
+                    var dateRented = new Date(document.getElementById("dateRented").value);
+                    var dueDate = new Date(document.getElementById("dueDate").value);
+
+                    var durationInMillis = dueDate - dateRented;
+
+                    var durationInDays = durationInMillis / (1000 * 60 * 60 * 24);
+
+                    // insert the value to the duraton field..
+                    document.getElementById("duration").value = Math.floor(durationInDays);
+                }
+            </script>
 
             <button type="submit" class="btn btn-primary">Create Rental</button>
         </form>
