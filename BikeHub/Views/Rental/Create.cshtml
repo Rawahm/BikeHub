@@ -129,12 +129,12 @@
             </div>
             <div class="form-group">
                 <label for="dateRented">Date Rented:</label>
-                <input type="date" class="form-control" id="dateRented" name="dateRented" asp-for="DateRented">
+                <input type="date" class="form-control" id="dateRented" name="dateRented" asp-for="DateRented" value="@DateTime.Today.ToString("yyyy-MM-dd")">
                 <span asp-validation-for="DateRented" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label for="dueDate">Due Date:</label>
-                <input type="date" class="form-control" id="dueDate" name="dueDate" asp-for="DueDate">
+                <input type="date" class="form-control" id="dueDate" name="dueDate" asp-for="DueDate" value="@DateTime.Today.ToString("yyyy-MM-dd")">
                 <span asp-validation-for="DueDate" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -177,18 +177,18 @@
             </div>
             <div class="form-group">
                 <label for="basketRented">Travelling Method:</label>
-                <input type="text" class="form-control" id="basketRented" name="TravelMethod" asp-for="MethodOfTravel">
+                <input type="text" class="form-control" id="methodOfTravel" name="methodOfTravel" asp-for="MethodOfTravel">
                 <span asp-validation-for="MethodOfTravel" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label for="dateRented">Payment Date:</label>
-                <input type="date" class="form-control" id="dateRented" name="paymentdate" asp-for="PaymentDate">
+                <input type="date" class="form-control" id="paymentDate" name="paymentDate" asp-for="PaymentDate" value="@DateTime.Today.ToString("yyyy-MM-dd")">
                 <span asp-validation-for="PaymentDate" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label for="dateRented"> Date Returned:</label>
-                <input type="date" class="form-control" id="dateReterned" name="dateRetrned" asp-for="DateRented">
-                <span asp-validation-for="DateRented" class="text-danger"></span>
+                <input type="date" class="form-control" id="DateReturned" name="DateReturned" asp-for="DateReturned" value="@DateTime.Today.ToString("yyyy-MM-dd")">
+                <span asp-validation-for="DateReturned" class="text-danger"></span>
             </div>
             <div class="form-group">
 
@@ -198,8 +198,8 @@
 
             <div class="form-group">
 
-                <input type="checkbox" id="paid" name="banned" asp-for="Paid">
-                <label for="banned" class="checkbox-label">Paid:</label>
+                <input type="checkbox" id="paid" name="paid" asp-for="Paid">
+                <label for="paid" class="checkbox-label">Paid:</label>
             </div>
             <div class="form-group">
                 <label for="notes">Notes:</label>

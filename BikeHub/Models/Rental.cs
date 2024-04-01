@@ -31,6 +31,8 @@ namespace BikeHub.Models
         public bool Banned { get; set; }
         public string? Notes { get; set; }
         public Customer? Customer { get; set; }
+      
+
 
     }
 }

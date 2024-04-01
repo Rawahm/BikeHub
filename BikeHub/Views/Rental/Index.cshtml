@@ -86,12 +86,12 @@
                 <td>@(rental.DateReturned.ToShortDateString())</td>
                 <td>@rental.Duration</td>
                 <td>@rental.Amount</td>
-                <td>@(rental.Paid ? "Yes" : "No")</td>
-                <td>@(rental.PaymentDate.ToString())</td>
+                <td>@(rental.Paid)</td>
+                <td>@(rental.PaymentDate?.ToShortDateString())</td>
                 <td>@rental.KMSRidden</td>
                 <td>@rental.MethodOfTravel</td>
                 <td>@rental.DaysLate</td>
-                <td>@(rental.Banned ? "Yes" : "No")</td>
+                <td>@(rental.Banned)</td>
                 <td>@rental.Notes</td>
             </tr>
         }
