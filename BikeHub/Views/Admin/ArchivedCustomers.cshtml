@@ -1,0 +1,68 @@
+﻿@model List<BikeHub.Models.ArchiveCustomer>
+
+@{
+    ViewData["Title"] = "Archived Customers";
+}
+
+<h1>Archived Customers</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Customer ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Archived Date</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var customer in Model)
+        {
+            <tr>
+                <td>@customer.StudentId</td>
+                <td>@customer.FirstName</td>
+                <td>@customer.LastName</td>
+                <td>@customer.Email</td>
+                <td>@customer.ArchivedOn</td>
+                
+                <td>
+                    <form asp-controller="Admin" asp-action="RetrieveCustomer" method="post">
+                        <input type="hidden" name="studentId" value="@customer.StudentId" />
+                        <button type="submit" class="btn btn-primary">Retrieve</button>
+                        <button class="btn btn-danger" onclick="deleteCustomer(@customer.StudentId)">Delete</button>
+                    </form>
+
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+        function deleteCustomer(customerId) {
+            if (confirm('Are you sure you want to delete this archived customer?')) {
+                fetch(`/Admin/DeleteArchivedCustomer?id=${customerId}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                })
+                    .then(response => {
+                        if (response.ok) {
+                            window.location.reload(); // Reload the page after successful deletion
+                        } else {
+                            alert('Failed to delete archived customer!');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while processing this request.');
+                    });
+            }
+        }
+    </script>
+}

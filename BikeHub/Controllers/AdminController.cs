@@ -95,15 +95,71 @@ namespace BikeHub.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
-            var customer = await dbContext.CustomerInformation.FirstOrDefaultAsync(x => x.StudentId == id);
-            if (customer != null)
+            using (var transaction = dbContext.Database.BeginTransaction())
             {
-                dbContext.CustomerInformation.Remove(customer);
-                await dbContext.SaveChangesAsync();
-                return RedirectToAction("DeleteSuccess");
+                try
+                {
+                    var customer = await dbContext.CustomerInformation.FirstOrDefaultAsync(x => x.StudentId == id);
+                    if (customer != null)
+                    {
+                        // Archive the customer record
+                        await ArchiveCustomer(customer);
+
+                        // Remove the customer record from the main table
+                        dbContext.CustomerInformation.Remove(customer);
+                        await dbContext.SaveChangesAsync();
+
+                        // Commit the transaction
+                        transaction.Commit();
+
+                        return RedirectToAction("DeleteSuccess");
+                    }
+                    return RedirectToAction("Index"); // Redirect to the home page if customer not found
+                }
+                catch (Exception)
+                {
+                    // Rollback the transaction in case of an exception
+                    transaction.Rollback();
+                    throw; // Re-throw the exception to be handled elsewhere if needed
+                }
             }
-            return RedirectToAction("Index"); // Redirect to the home page if customer not found
         }
+
+        // Method to archive the customer record
+        private async Task ArchiveCustomer(Customer customer)
+        {
+            try
+            {
+                // Create a new archive record
+                var archivedCustomer = new ArchiveCustomer
+                {
+                    StudentId = customer.StudentId,
+                    FirstName = customer.FirstName,
+                    LastName = customer.LastName,
+                    Email = customer.Email,
+                    CampusName = customer.CampusName,
+                    PhoneNumber = customer.PhoneNumber,
+                    EmergencyContactName = customer.EmergencyContactName,
+                    EmergencyContactNum = customer.EmergencyContactNum,
+                    TypeOfCustomer = customer.TypeOfCustomer,
+                    TypeOfRider = customer.TypeOfRider,
+                    TAndCAgreement = customer.TAndCAgreement,
+                    EmailSubscription = customer.EmailSubscription,
+                    ArchivedOn = DateTime.Now // Set the archived date
+                };
+
+                // Add the archive record to the archive table
+                dbContext.ArchiveCustomer.Add(archivedCustomer);
+                await dbContext.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as per your application's requirements
+                Console.WriteLine($"Failed to archive customer: {ex.Message}");
+                throw; // Re-throw the exception to be handled elsewhere if needed
+            }
+        }
+
         [HttpGet]
         public async Task<IActionResult> AdminList()
         {
@@ -111,6 +167,61 @@ namespace BikeHub.Controllers
             return View(customers);
 
 
+
         }
+        [HttpPost]
+        public async Task<IActionResult> RetrieveCustomer(int studentId)
+        {
+            var archivedCustomer = await dbContext.ArchiveCustomer.FirstOrDefaultAsync(x => x.StudentId == studentId);
+            if (archivedCustomer != null)
+            {
+                // Add the archived customer back to the CustomerInformation table
+                var customer = new Customer
+                {
+                    StudentId = archivedCustomer.StudentId,
+                    FirstName = archivedCustomer.FirstName,
+                    LastName = archivedCustomer.LastName,
+                    Email = archivedCustomer.Email,
+                    CampusName = archivedCustomer.CampusName,
+                    PhoneNumber=archivedCustomer.PhoneNumber,
+                    EmergencyContactName = archivedCustomer.EmergencyContactName,
+                    EmergencyContactNum = archivedCustomer.EmergencyContactNum,
+                    TypeOfCustomer = archivedCustomer.TypeOfCustomer,
+                    TypeOfRider = archivedCustomer.TypeOfRider,
+                    TAndCAgreement  = archivedCustomer.TAndCAgreement,
+                    EmailSubscription = archivedCustomer.EmailSubscription,
+                };
+
+                dbContext.CustomerInformation.Add(customer);
+                await dbContext.SaveChangesAsync();
+
+                // Now delete the archived record
+                dbContext.ArchiveCustomer.Remove(archivedCustomer);
+                await dbContext.SaveChangesAsync();
+
+                return RedirectToAction("AdminList", "Customer"); // Redirect back to the archived customers view
+            }
+
+            return NotFound(); // Handle case where archived customer is not found
+        }
+
+        public async Task<IActionResult> ArchivedCustomers()
+        {
+            var archivedCustomers = await dbContext.ArchiveCustomer.ToListAsync();
+            return View(archivedCustomers);
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteArchivedCustomer(int id)
+        {
+            var archivedCustomer = await dbContext.ArchiveCustomer.FirstOrDefaultAsync(x => x.StudentId == id);
+            if (archivedCustomer != null)
+            {
+                dbContext.ArchiveCustomer.Remove(archivedCustomer);
+                await dbContext.SaveChangesAsync();
+                return Ok(); // Return success status if deletion is successful
+            }
+            return NotFound(); // Return not found status if archived customer not found
+        }
+
     }
 }

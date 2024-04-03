@@ -101,47 +101,70 @@ namespace BikeHub.Controllers
             }
         }
 
-         // End of the first version of the create method..
+        // the first version of the create method..
 
         /*
-        public async Task<IActionResult> Create(RentalViewModel model)
+       public async Task<IActionResult> Create(RentalViewModel model)
+{
+    // Check if the model state is valid
+    if (!ModelState.IsValid)
+    {
+        // If the model state is not valid, return the view with validation errors
+        return View(model);
+    }
+
+    try
+    {
+        // Retrieve the customer from the database using the provided CustomerId
+        var customer = await dbContext.CustomerInformation.FindAsync(model.Customer.StudentId);
+        if (customer == null)
         {
-            // Retrieve the customer from the database using the provided CustomerId
-           // var customer = await dbContext.CustomerInformation.FindAsync(keyValues: model.Customer.StudentId);
-
-            // Create a new Rental entity and populate its properties
-            var rental = new Rental
-            {
-                // Set the Customer property to the retrieved customer
-              //  Customer = customer,
-              StudentId = model.Customer.StudentId,
-                Name = model.Customer.FirstName + "" + model.Customer.LastName,
-                Email = model.Customer.Email,
-                BikeRented = model.BikeRented,
-                Lights = model.Lights,
-                DateRented = (DateTime)model.DateRented,
-                DateReturned = (DateTime)model.DateReturned,
-                KeyRented = model.KeyRented,
-                DaysLate = model.DaysLate,
-                DueDate = (DateTime)model.DueDate,
-                Duration = model.Duration,
-                Amount = model.Amount,
-                Banned = model.Banned,
-                BasketRented = model.BasketRented,
-                Paid = model.Paid,
-                PaymentDate = model.PaymentDate,
-                KMSRidden = model.KMSRidden,
-                LockRented = model.LockRented,
-                Notes = model.Notes,
-                MethodOfTravel = model.MethodOfTravel
-            };
-            // Add the rental to the context and save changes
-            dbContext.Rental.Add(rental);
-            await dbContext.SaveChangesAsync();
-
-            // Redirect to the Index page : /Rental/Index with the Get request.....
-            return RedirectToAction("Index");
+            ModelState.AddModelError("", "Customer not found.");
+            return View(model);
         }
+
+        // Create a new Rental entity and populate its properties
+        var rental = new Rental
+        {
+            // Set the Customer property to the retrieved customer
+            Customer = customer,
+            StudentId = model.Customer.StudentId,
+            Name = model.Name,
+            Email = model.Email,
+            BikeRented = model.BikeRented,
+            Lights = model.Lights,
+            DateRented = model.DateRented,
+            DateReturned = model.DateReturned,
+            KeyRented = model.KeyRented,
+            DaysLate = model.DaysLate,
+            DueDate = model.DueDate,
+            Duration = model.Duration,
+            Amount = model.Amount,
+            Banned = model.Banned,
+            BasketRented = model.BasketRented,
+            Paid = model.Paid,
+            PaymentDate = model.PaymentDate,
+            KMSRidden = model.KMSRidden,
+            LockRented = model.LockRented,
+            Notes = model.Notes,
+            MethodOfTravel = model.MethodOfTravel
+        };
+
+        // Add the rental to the context and save changes
+        dbContext.Rental.Add(rental);
+        await dbContext.SaveChangesAsync();
+
+        // Redirect to the Index page : /Rental/Index with the Get request.....
+        return RedirectToAction("Index");
+    }
+    catch (Exception ex)
+    {
+        // Log the exception or handle it appropriately
+        ModelState.AddModelError("", "An error occurred while saving the rental information.");
+        return View(model);
+    }
+}
+
         */
         [HttpGet]
         public IActionResult Index()
