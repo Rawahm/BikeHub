@@ -25,6 +25,7 @@ namespace BikeHub.Controllers
             return View();
         }
         // POST action to handle form submission and retrieve customer record
+        /* This is search customer by ID only it replaced with the other method that search by other terms
         [HttpPost]
         public async Task<IActionResult> SearchCustomer(int customerId)
         {
@@ -39,6 +40,50 @@ namespace BikeHub.Controllers
 
             return View("CustomerInfo", customer);
         }
+        */
+        public async Task<IActionResult> SearchCustomer(string searchType, string searchTerm)
+        {
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                TempData["Message"] = "Please enter a search term.";
+                return RedirectToAction("AdminList");
+            }
+
+            Customer? customer = null;
+        
+            switch (searchType)
+            {
+                case "StudentId":
+                    if (int.TryParse(searchTerm, out int id))
+                    {
+                        customer = await dbContext.CustomerInformation.FirstOrDefaultAsync(c => c.StudentId == id);
+                    }
+                    break;
+
+                case "Name":
+                    customer = await dbContext.CustomerInformation
+                        .FirstOrDefaultAsync(c => c.FirstName.Contains(searchTerm) || c.LastName.Contains(searchTerm));
+                    break;
+
+                case "Email":
+                    customer = await dbContext.CustomerInformation
+                        .FirstOrDefaultAsync(c => c.Email.Contains(searchTerm));
+                    break;
+
+                default:
+                    TempData["Message"] = "Invalid search type selected.";
+                    return RedirectToAction("AdminList");
+            }
+
+            if (customer == null)
+            {
+                TempData["Message"] = "No customer found matching the search term: " + searchTerm;
+                return RedirectToAction("AdminList");
+            }
+
+            return View("CustomerInfo", customer);
+        }
+
         // Navigate to the EditCustomer page 
         [HttpGet]
         public async Task<IActionResult> EditCustomer(int id)
