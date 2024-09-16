@@ -28,7 +28,11 @@ namespace BikeHub.Controllers
         {
             return View();
         }
-
+        public IActionResult ViewContactMessages()
+        {
+            var contactMessages = _db.ContactUsMessages.ToList();
+            return View(contactMessages);
+        }
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {

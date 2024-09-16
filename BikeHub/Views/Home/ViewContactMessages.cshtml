@@ -1,0 +1,85 @@
+﻿@model IEnumerable<BikeHub.Models.ContactUs>
+
+@{
+    ViewData["Title"] = "View Contact Messages";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* General styling for the container */
+    .contact-messages-container {
+        max-width: 1200px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        font-size: 28px;
+        font-weight: bold;
+        color: #343a40;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    /* Table styling */
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        background-color: #fff;
+    }
+
+        .table thead {
+            background-color: #a97bff;
+            color: white;
+            font-size: 18px;
+        }
+
+        .table th, .table td {
+            padding: 15px;
+            text-align: left;
+            border: 1px solid #dee2e6;
+        }
+
+        .table tbody tr:nth-child(odd) {
+            background-color: #f2f2f2;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background-color: #e9ecef;
+        }
+
+        .table td {
+            font-size: 16px;
+            color: #333;
+        }
+</style>
+
+<div class="contact-messages-container">
+    <h2>Contact Messages</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Date </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var message in Model)
+            {
+                <tr>
+                    <td>@message.Name</td>
+                    <td>@message.Email</td>
+                    <td>@message.Message</td>
+                    <td>@message.SubmittedDate.ToString("MM/dd/yyyy")</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
