@@ -28,6 +28,32 @@ namespace BikeHub.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public async Task<IActionResult> ContactUs(string name, string email, string message)
+        {
+            // Check if contact us form is valid 
+            if (ModelState.IsValid)
+            {
+                // Create a new ContactUs object
+                var contactUs = new ContactUs
+                {
+                    Name = name,
+                    Email = email,
+                    Message = message
+                };
+
+                // Add the object to the DbSet and save it to the database
+                _db.ContactUsMessages.Add(contactUs);
+                await _db.SaveChangesAsync();
+
+                //  display a confirmation message 
+                TempData["Message"] = "Thank you for reaching out! We will get back to you soon.";
+                return RedirectToAction("Index");
+            }
+
+            return View("Index");
+        }
+        [HttpGet]
         public IActionResult ViewContactMessages()
         {
             var contactMessages = _db.ContactUsMessages.ToList();
