@@ -1,0 +1,90 @@
+﻿@{
+    ViewData["Title"] = "";
+}
+<style>
+    /* Styles for the About Us page */
+    .about-title {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+    }
+
+    .about-text {
+        font-size: 1.1rem;
+        color: #34495e;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    .hub-hours-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #2980b9;
+        margin-bottom: 0.5rem;
+    }
+
+    .hub-hours {
+        font-size: 1.1rem;
+        color: #16a085;
+        margin-bottom: 1rem;
+    }
+
+    .contact-info {
+        font-size: 1rem;
+        color: #2c3e50;
+    }
+
+        .contact-info a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+
+            .contact-info a:hover {
+                text-decoration: underline;
+            }
+
+    .about-image {
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        max-width: 100%;
+        height: auto;
+        margin-top: 1rem;
+    }
+
+</style>
+<div class="container">
+
+    <p><h3>Welcome to the Sheridan Bike Hub!</h3></p>
+    @{
+        ViewData["Title"] = "About Us";
+    }
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="about-title">About Us</h1>
+                <p class="about-text">
+                    Whether you are a cycling enthusiast or a newcomer to biking, the Sheridan Bike Hub is open to all members of the Sheridan community! Head over to the bike hubs at the HMC or Davis campuses to learn how to repair your own bike, rent a bicycle, get cycling resources, or volunteer to learn new skills and meet new people.
+                </p>
+                <p class="about-text">
+                    The Sheridan Bike Hub is located at HMC Entrance A9 and Davis Portable #7.
+                </p>
+                <h2 class="hub-hours-title">Hub Hours:</h2>
+                <p class="hub-hours">
+                    <strong>Davis:</strong> Tuesdays and Wednesdays, 10 AM - 1 PM; 2 PM - 5 PM<br>
+                    <strong>HMC:</strong> Thursdays and Fridays, 10 AM - 1 PM; 2 PM - 5 PM
+                </p>
+                <p class="contact-info">
+                    The Bike Hub will be open until the end of October. If you have any questions, contact <a href="mailto:SheridanBikeHub@sheridancollege.ca">SheridanBikeHub@sheridancollege.ca</a>.
+                </p>
+            </div>
+            <p>Learn more about us and our services on our website: <a href="https://missionzero.sheridancollege.ca/transportation/bikehub/" target="_blank">Sheridan Bike Hub</a></p>
+
+            <div class="col-md-6">
+
+                <img src="https://missionzero.sheridancollege.ca/wp-content/uploads/2021/06/DSC03493-scaled-e1679070451628-1600x1024.jpg" alt="Sheridan Bike Hub" class="img-fluid about-image">
+            </div>
+        </div>
+    </div>
+</div>

@@ -24,7 +24,7 @@ namespace BikeHub.Controllers
             return View(CustomerInformation);
         }
 
-        public IActionResult Privacy()
+        public IActionResult About()
         {
             return View();
         }
