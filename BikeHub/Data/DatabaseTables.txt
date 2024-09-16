@@ -1,0 +1,70 @@
+﻿namespace BikeHub.Data
+-- Create CustomerInformation table:
+CREATE TABLE CustomerInformation (
+    StudentID INT PRIMARY KEY,
+    FirstName VARCHAR(100),
+    LastName VARCHAR(100),
+    Email VARCHAR(150),
+    CampusName VARCHAR(100),
+    PhoneNumber VARCHAR(10),
+    EmergencyContactName VARCHAR(100),
+    EmergencyContactNum VARCHAR(10),
+    TypeOfCustomer VARCHAR(100),
+    TypeOfRider VARCHAR(100),
+    TAndCAgreement BIT,
+    EmailSubscription BIT
+);
+
+
+-- Craete a rental table 
+CREATE TABLE Rental (
+    Id INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(MAX) NOT NULL,
+    Email NVARCHAR(MAX) NOT NULL,
+    BikeRented NVARCHAR(MAX) NOT NULL,
+    DateRented DATETIME NOT NULL,
+    LockRented NVARCHAR(MAX) NOT NULL,
+    BasketRented NVARCHAR(MAX) NOT NULL,
+    KeyRented NVARCHAR(MAX) NOT NULL,
+    Lights NVARCHAR(MAX) NOT NULL,
+    DueDate DATETIME NOT NULL,
+    DateReturned DATETIME NULL,
+    Duration INT NOT NULL,
+    Amount DECIMAL(18, 2) NOT NULL,
+    Paid BIT NOT NULL,
+    PaymentDate DATETIME NULL,
+    KMSRidden INT NOT NULL,
+    MethodOfTravel NVARCHAR(MAX) NOT NULL,
+    DaysLate INT NOT NULL,
+    Banned BIT NOT NULL,
+    Notes NVARCHAR(MAX) NOT NULL,
+    FOREIGN KEY (Id) REFERENCES CustomerInformation(StudentID)
+);
+
+
+-- Craete Archive Customer:
+CREATE TABLE ArchiveCustomer (
+    ArchiveCustomerId INT IDENTITY(1,1) PRIMARY KEY,
+    StudentId INT NOT NULL,
+    FirstName VARCHAR(255) NOT NULL,
+    LastName VARCHAR(255) NOT NULL,
+    Email VARCHAR(255) NOT NULL,
+    CampusName VARCHAR(255),
+    PhoneNumber VARCHAR(20) NOT NULL,
+    EmergencyContactName VARCHAR(255),
+    EmergencyContactNum VARCHAR(20),
+    TypeOfCustomer VARCHAR(50),
+    TypeOfRider VARCHAR(50),
+    TAndCAgreement BIT NOT NULL,
+    EmailSubscription BIT NOT NULL,
+    ArchivedOn DATETIME NOT NULL DEFAULT GETDATE()
+);
+
+-- Create Contact us messages 
+CREATE TABLE ContactUsMessages (
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Name NVARCHAR(255) NOT NULL,
+    Email NVARCHAR(255) NOT NULL,
+    Message NVARCHAR(MAX) NOT NULL,
+    SubmittedDate DATETIME DEFAULT GETDATE()
+);
