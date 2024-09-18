@@ -19,6 +19,7 @@ CREATE TABLE CustomerInformation (
 -- Craete a rental table 
 CREATE TABLE Rental (
     Id INT IDENTITY(1,1) PRIMARY KEY,
+    StudentId INT NOT NULL, 
     Name NVARCHAR(MAX) NOT NULL,
     Email NVARCHAR(MAX) NOT NULL,
     BikeRented NVARCHAR(MAX) NOT NULL,
@@ -38,9 +39,8 @@ CREATE TABLE Rental (
     DaysLate INT NOT NULL,
     Banned BIT NOT NULL,
     Notes NVARCHAR(MAX) NOT NULL,
-    FOREIGN KEY (Id) REFERENCES CustomerInformation(StudentID)
+    FOREIGN KEY (StudentId) REFERENCES CustomerInformation(StudentID)
 );
-
 
 -- Craete Archive Customer:
 CREATE TABLE ArchiveCustomer (
