@@ -2,7 +2,6 @@
     ViewData["Title"] = "Home Page";
 }
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,10 +12,8 @@
         .container {
             width: 80%;
             margin: 0 auto;
-            padding: 2px;
+            padding: 20px;
         }
-
-
 
         header h1 {
             margin: 0;
@@ -60,7 +57,6 @@
                 background-color: #555;
             }
 
-        /* Form Styling */
         input[type="text"],
         input[type="email"],
         textarea {
@@ -91,16 +87,32 @@
             padding: 10px 0;
         }
 
+        .testimonial {
+            background-color: #f5f5f5;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+        }
+
+        .stats ul {
+            list-style-type: none;
+        }
+
+            .stats ul li {
+                font-size: 24px;
+                margin: 10px 0;
+            }
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>Bike Hub</h1>
             <nav>
                 <ul>
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#events">Events</a></li>
                     <li><a href="#contact">Contact</a></li>
                     <li><a asp-action="ViewContactMessages">View Contact Messages</a></li>
                 </ul>
@@ -112,16 +124,11 @@
         <div class="container">
             <h2>Welcome to Bike Hub</h2>
             <p>Your one-stop destination for all things cycling</p>
-            <a href="#about" class="btn">Learn More</a>
+            <a href="#testimonials" class="btn">Learn More</a>
         </div>
     </section>
 
-    <section id="about">
-        <div class="container">
-            <h2>About Us</h2>
-            <p>Abou us Section.</p>
-        </div>
-    </section>
+   
 
     <section id="services">
         <div class="container">
@@ -129,7 +136,35 @@
             <ul>
                 <li>Bike Rentals</li>
                 <li>Bike Repairs</li>
+            </ul>
+        </div>
+    </section>
 
+    <section id="testimonials">
+        <div class="container">
+            <h2>What Our Customers Say</h2>
+            <div class="testimonial">
+                <p>"Bike Hub made my commuting easy. The rentals are affordable, and the team is always helpful."</p>
+                <p>- Reem J.</p>
+            </div>
+            <div class="testimonial">
+                <p>"Their repair service is really good. The bike has never been in better shape!"</p>
+                <p>- Jack S.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="events">
+        <div class="container">
+            <h2>Upcoming Events</h2>
+            <p></p>
+            <p></p>
+            <p></p>
+            <ul>
+                <p></p>
+                <li><strong>Bike Maintenance Workshop:  </strong>    September 30, 2024 - Learn how to fix basic issues and keep your bike in top shape.</li>
+                <p></p>
+                <li><strong>Community Ride:</strong> October 10, 2024 - Join us for a scenic ride around the city with fellow cyclists.</li>
             </ul>
         </div>
     </section>
@@ -151,6 +186,5 @@
             </form>
         </div>
     </section>
-
 </body>
 </html>
