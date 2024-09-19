@@ -14,9 +14,12 @@ namespace BikeHub.Controllers
     public class CustomerController : Controller
     {
         private readonly BikeHubDBContext dbContext;
-        public CustomerController(BikeHubDBContext dbContext)
+        private readonly IWebHostEnvironment webHostEnvironment;
+
+        public CustomerController(BikeHubDBContext dbContext, IWebHostEnvironment webHostEnvironment)
         {
             this.dbContext = dbContext;
+            this.webHostEnvironment = webHostEnvironment;
         }
         [HttpGet]
         public IActionResult Register()
@@ -29,6 +32,35 @@ namespace BikeHub.Controllers
         {
             if (ModelState.IsValid)
             {
+                /* Handle Wavier agreement..*/
+                if (!viewModel.TAndCAgreement)
+                {
+                    ModelState.AddModelError("TAndCAgreement", "You must agree to the terms and conditions.");
+                    return View(viewModel); // return the view with the  error
+                }
+                // Handle File Upload
+                if (viewModel.EnrollmentLetter != null)
+                {
+                    var fileExtension = Path.GetExtension(viewModel.EnrollmentLetter.FileName);
+                    if (fileExtension.ToLower() != ".doc" && fileExtension.ToLower() != ".docx")
+                    {
+                        ModelState.AddModelError("EnrollmentLetter", "Only .doc or .docx files are allowed.");
+                        return View(viewModel);
+                    }
+
+                    // Save the uploaded file to a folder
+                    string uploadsFolder = Path.Combine(webHostEnvironment.WebRootPath, "uploads");
+                    Directory.CreateDirectory(uploadsFolder); // Create directory if not exists
+                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(viewModel.EnrollmentLetter.FileName);
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await viewModel.EnrollmentLetter.CopyToAsync(fileStream);
+                    }
+                }
+
+                // Insert customer data into the database
                 var customer = new Customer
                 {
                     StudentId = viewModel.StudentId,
@@ -44,6 +76,7 @@ namespace BikeHub.Controllers
                     TAndCAgreement = viewModel.TAndCAgreement,
                     EmailSubscription = viewModel.EmailSubscription
                 };
+
 
                 await dbContext.CustomerInformation.AddAsync(customer);
                 await dbContext.SaveChangesAsync();

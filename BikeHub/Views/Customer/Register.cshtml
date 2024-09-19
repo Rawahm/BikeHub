@@ -89,10 +89,119 @@
             font-size: 14px;
             color: #666;
         }
+        /* Modal Styling */
+        .modal {
+            display: none; /* Ensure the modal is hidden by default */
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); /* Dim background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+            padding: 20px;
+            max-height: 80%;
+            overflow-y: auto; /* Allows scrolling for long waiver content */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        .modal-header {
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .modal-body {
+            font-size: 0.9rem;
+            color: #333;
+            line-height: 1.6;
+            padding-right: 10px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5rem;
+            color: #666;
+            cursor: pointer;
+        }
+
+            .close:hover {
+                color: #333;
+            }
+
+        .modal-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background-color: #007bff;
+            border-radius: 4px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background-color: #f1f1f1;
+        }
+        /* File input styling */
+        input[type="file"] {
+            display: block;
+            width: 56%;
+            padding: 3px;
+            border: 1px solid #ffff;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #333;
+            background-color: #f9f9f9;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+            input[type="file"]::-webkit-file-upload-button {
+                background-color: #007bff;
+                border: none;
+                border-radius: 5px;
+                color: white;
+                padding: 10px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+
+                input[type="file"]::-webkit-file-upload-button:hover {
+                    background-color: #0056b3;
+                }
+
+            input[type="file"]::-moz-file-upload-button {
+                background-color: #007bff;
+                border: none;
+                border-radius: 5px;
+                color: white;
+                padding: 10px;
+                font-size: 16px;
+                cursor: pointer;
+            }
+
+                input[type="file"]::-moz-file-upload-button:hover {
+                    background-color: #0056b3;
+                }
     </style>
 </head>
 <body>
-    <form id="customerForm" method="post">
+    <form id="customerForm" method="post" enctype="multipart/form-data">
         <h2>Register</h2>
                 <div class="form-group">
             <label for="CustomerId">Customer ID:</label>
@@ -150,14 +259,86 @@
             <input type="text" id="TypeOfRider" name="TypeOfRider" asp-for="TypeOfRider">
         </div>
         <div class="form-group">
-            <input type="checkbox" id="TAndCAgreement" name="TAndCAgreement" asp-for="TAndCAgreement">
-            <label class="checkbox-label" for="TAndCAgreement">I agree to the terms and conditions</label>
+            <input type="checkbox" id="TAndCAgreement" name="TAndCAgreement" asp-for="TAndCAgreement" required>
+            <label class="checkbox-label" for="TAndCAgreement">
+                I agree to the
+                <a href="#" id="waiverLink">Bikehub Waiver</a>
+            </label>
+            <span asp-validation-for="TAndCAgreement" class="text-danger"></span>
+
+
         </div>
+        <!-- File That should be upload for Enrollment Letter -->
+        <div class="form-group">
+            <label for="EnrollmentLetter">Upload Enrollment Letter (.doc)</label>
+            <input type="file" id="EnrollmentLetter" name="EnrollmentLetter" accept=".doc,.docx" required>
+            <span asp-validation-for="EnrollmentLetter" class="text-danger"></span>
+        </div>
+
         <div class="form-group">
             <input type="checkbox" id="EmailSubscription" name="EmailSubscription" asp-for="EmailSubscription">
             <label class="checkbox-label" for="EmailSubscription">Subscribe to email notifications</label>
         </div>
-        <button type="submit">Submit</button>
+        <!-- The Waiver Model -->
+        <div id="waiverModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 class="modal-header">Sheridan Bike Hub Rental Program: Waiver Agreement</h2>
+                <div class="modal-body">
+                    <p><strong>RELEASE OF LIABILITY, WAIVER OF CLAIMS, ASSUMPTION OF RISKS, AND INDEMNITY AGREEMENT</strong></p>
+                    <p><strong style="color:red;">WARNING:</strong> BY SIGNING THIS DOCUMENT YOU WILL WAIVE CERTAIN LEGAL RIGHTS, INCLUDING THE RIGHT TO SUE. PLEASE READ CAREFULLY!</p>
+
+                    <p><strong style="color:darkblue">I, the undersigned, do hereby acknowledge the following:</strong></p>
+                    <p>1) I am at least 18 years of age; if I am under 18 years of age, I will delegate this form to my parent/Guardian.</p>
+                    <p>2) I am legally competent to sign this Release of Liability, Waiver of Claims, Assumption of Risks and Indemnity Agreement for participation in The Sheridan College Institute of Technology and Advanced Learning (“Sheridan”) Bike Hub Rental Program;</p>
+                    <p>3) I have the requisite cycling experience to operate the rental bike and I will not misuse or unduly abuse the rental bike;</p>
+                    <p>4) My use and/or participation in the Sheridan Bike Hub Rental Program is entirely voluntary;</p>
+                    <p>5) I have a personal duty and responsibility to learn and to follow road safety standards, guidelines, and procedures, and to operate the rental bike in a manner appropriate to any and all prevailing road and weather conditions. I understand that I need to practice safe cycling while the bike is in my possession. I also acknowledge that it is my responsibility to ensure that the rental bike is in good working condition at all times;</p>
+                    <p>6) I understand that I am responsible for the well being of the bike while it is under my possession, including theft and any physical damage to the bike, and I am hereby responsible for paying the costs of replacing or repairing the bike, and any additional costs associated with the loss of the bike, if such theft or damage occurs. I also acknowledge that I am responsible for maintaining function and ensuring replacement of the rental bike’s accessories including but not limited to lights, bells, and baskets;</p>
+                    <p>7) In the event that the bike is not returned as and when due and I cannot be reached for two weeks after the return date, Sheridan Bike Hub will report the bike stolen to the Region of Peel Police;</p>
+                    <p>8) I accept full responsibility for the rental bike for the duration of the rental and it is my responsibility to check for flaws, defects, and damage prior to accepting the rental bike. I understand that all charges for the rental are applied at the time that the bike is in my possession, whether it is in use or not.</p>
+                    <p>9) I understand that the rental bikes are strictly only for my personal use. I further agree not to use the bikes to engage in any form of commercial, business, revenue-generating transaction which includes but is not limited to food delivery, mail delivery, newspaper delivery, courier services, etc.</p>
+                    <p><strong>ASSUMPTION OF RISK:</strong></p>
+                    <p>I understand and accept that renting this bike and participating in bicycling involves risks not limited to: loss or damage to personal property, all manner of personal injury, injury resulting from falling on uneven or slippery terrain including man-made features, impacting against the floor, ground, trees, rocks, cement, course structures, or other obstructions; impacting with other users of the road; potential for bone and muscular skeletal injury such as sprains and strains; any illness or injury resulting from exposure to cold, wet or windy weather, or the effects...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diable the submit button then enable it with teh script code...-->
+        <button type="submit" id="submitButton" disabled>Submit</button>
     </form>
+
+    <script>
+        // Get modal elements
+        var modal = document.getElementById("waiverModal");
+        var waiverLink = document.getElementById("waiverLink");
+        var closeModal = document.getElementsByClassName("close")[0];
+
+        // Show the modal when waiver link is clicked
+        waiverLink.onclick = function (event) {
+            event.preventDefault();
+            modal.style.display = "flex"; // Show modal
+        };
+
+        // Hide modal when close button is clicked
+        closeModal.onclick = function () {
+            modal.style.display = "none";
+        };
+
+        // Hide modal when clicked out side of modal content
+        window.onclick = function (event) {
+            if (event.target === modal) {
+                modal.style.display = "none";
+            }
+        };
+
+        // Disable submit button until checkbox is checked
+        var tAndCAgreementCheckbox = document.getElementById("TAndCAgreement");
+        var submitButton = document.getElementById("submitButton");
+
+        tAndCAgreementCheckbox.addEventListener("change", function () {
+            submitButton.disabled = !tAndCAgreementCheckbox.checked;
+        });
+    </script>
 </body>
 </html>
