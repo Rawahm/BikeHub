@@ -256,8 +256,14 @@
         </div>
         <div class="form-group">
             <label for="TypeOfRider">Type of Rider:</label>
-            <input type="text" id="TypeOfRider" name="TypeOfRider" asp-for="TypeOfRider">
+            <select id="TypeOfRider" name="TypeOfRider" asp-for="TypeOfRider">
+                <option value="I am relatively new to riding bikes">I am relatively new to riding bikes</option>
+                <option value="I ride a few times a year">I ride a few times a year</option>
+                <option value="I ride as often as I can">I ride as often as I can</option>
+                <option value="I ride most/all days of the week">I ride most/all days of the week</option>
+            </select>
         </div>
+
         <div class="form-group">
             <input type="checkbox" id="TAndCAgreement" name="TAndCAgreement" asp-for="TAndCAgreement" required>
             <label class="checkbox-label" for="TAndCAgreement">
