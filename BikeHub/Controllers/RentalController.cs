@@ -221,5 +221,29 @@ namespace BikeHub.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public IActionResult ViewRentedBikes()
+        {
+            // Show all  rentals where AvailabilityStatus
+            // is equal to "Rented"
+            var rentedBikes = dbContext.Rental
+                .Where(r => r.AvailabilityStatus == "Rented")
+                .Select(r => new Rental
+                {
+                    Id = r.Id,
+                    StudentId = r.StudentId,
+                    Name = r.Name,
+                    Email = r.Email,
+                    BikeRented = r.BikeRented,
+                    DateRented = r.DateRented,
+                    DueDate = r.DueDate,
+                    Amount = r.Amount,
+                    Paid = r.Paid,
+                    AvailabilityStatus = r.AvailabilityStatus
+                })
+                .ToList();
+
+            return View(rentedBikes); // Pass rented bikes to the view
+        }
     }
 }

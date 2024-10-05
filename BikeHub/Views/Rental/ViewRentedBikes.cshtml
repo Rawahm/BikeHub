@@ -1,0 +1,53 @@
+﻿@model IEnumerable<BikeHub.Models.Rental>
+
+<h2>Rented Bikes</h2>
+<style>
+ /* Table Styling */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+            .table th, .table td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            .table th {
+                background-color: #007bff;
+                color: white;
+            }
+
+        .table-striped tbody tr:nth-of-type(odd) {
+            background-color: #f9f9f9;
+        }
+</style>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Bike Rented</th>
+            <th>Date Rented</th>
+            <th>Due Date</th>
+            <th>Amount</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var rental in Model)
+        {
+            <tr>
+                <td>@rental.Name</td>
+                <td>@rental.Email</td>
+                <td>@rental.BikeRented</td>
+                <td>@rental.DateRented.ToString("MM/dd/yyyy")</td>
+                <td>@rental.DueDate.ToString("MM/dd/yyyy")</td>
+                <td>@rental.Amount</td>
+                <td>@rental.AvailabilityStatus</td>
+            </tr>
+        }
+    </tbody>
+</table>
