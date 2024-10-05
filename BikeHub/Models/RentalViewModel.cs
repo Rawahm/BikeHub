@@ -48,6 +48,9 @@ namespace BikeHub.Models
         [Range(0, double.MaxValue, ErrorMessage = "Amount must be greater than or equal to 0.")]
         public decimal Amount { get; set; }
 
+        public string AvailabilityStatus { get; set; } // "Rented",  "Retired", "Available"
+        public string PaymentMethod { get; set; }  //Cash,CIBC choices from the LISt
+
         [Required(ErrorMessage = "Paid status is required.")]
         public bool Paid { get; set; }
 

@@ -83,7 +83,9 @@ namespace BikeHub.Controllers
                     KMSRidden = model.KMSRidden,
                     LockRented = model.LockRented,
                     Notes = model.Notes,
-                    MethodOfTravel = model.MethodOfTravel
+                    MethodOfTravel = model.MethodOfTravel,
+                    PaymentMethod = model.PaymentMethod,
+                    AvailabilityStatus = model.AvailabilityStatus
                 };
 
                 // Add the rental to the context and save changes
