@@ -1,53 +1,139 @@
 ﻿@model IEnumerable<BikeHub.Models.Rental>
-
-<h2>Rented Bikes</h2>
-<style>
- /* Table Styling */
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+@{
+    ViewData["Title"] = "Rented Bikes List";
+}
+<head>
+    <style>
+        /*  container for Sidebar and Main Content */
+        .container-dashboard {
+            display: flex; 
+            min-height: 100vh; 
         }
 
-            .table th, .table td {
-                padding: 12px;
-                text-align: left;
-                border-bottom: 1px solid #ddd;
+        /* Sidebar Styles */
+        .sidebar {
+            width: 276px;
+            background-color: #003366;
+            padding: 20px 0;
+            height: 100vh; 
+            overflow-y: auto; 
+            flex-shrink: 0; 
+        }
+
+            .sidebar a {
+                display: block;
+                color: #ffffff;
+                padding: 10px 20px;
+                text-decoration: none;
+                font-size: 16px;
             }
 
-            .table th {
-                background-color: #007bff;
-                color: white;
+                .sidebar a:hover {
+                    background-color: blue;
+                    width: 290px;
+                    padding: 10px;
+                    font-size: 22px;
+                }
+
+        /* Admin Clip img Art */
+        .admin-image {
+            padding: 20px;
+            width: 80%;
+            border-radius: 33px;
+            margin-bottom: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex-grow: 1; 
+            padding: 40px;
+            background-color: #f8f9fa;
+        }
+
+        /* Custom CSS for Rental List View */
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        .table {
+            width: 100%; 
+        }
+
+            .table th,
+            .table td {
+                padding: 8px; 
             }
 
         .table-striped tbody tr:nth-of-type(odd) {
             background-color: #f9f9f9;
         }
-</style>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Bike Rented</th>
-            <th>Date Rented</th>
-            <th>Due Date</th>
-            <th>Amount</th>
-            <th>Status</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var rental in Model)
-        {
-            <tr>
-                <td>@rental.Name</td>
-                <td>@rental.Email</td>
-                <td>@rental.BikeRented</td>
-                <td>@rental.DateRented.ToString("MM/dd/yyyy")</td>
-                <td>@rental.DueDate.ToString("MM/dd/yyyy")</td>
-                <td>@rental.Amount</td>
-                <td>@rental.AvailabilityStatus</td>
-            </tr>
+
+        .table-bordered {
+            border: 1px solid #ddd; /* Add borders to table */
         }
-    </tbody>
-</table>
+
+        .table thead th {
+            background-color: #0066aa;
+            color: #fff; 
+        }
+
+        .table-responsive {
+            overflow-x: auto; 
+        }
+    </style>
+</head>
+
+<!-- Flexbox Container for Sidebar and Main Content -->
+<div class="container-dashboard">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="~/img/Ad2.png" alt="Admin img" class="admin-image" />
+        <h4 class="text-center text-white">BikeHub Admin</h4>
+        <a href="/Admin/login">🔓Login</a>
+        <a href="/Admin/AdminList">📋 👩🏽‍💻Customer List</a>
+        <a href="/admin/inventory-list">📋🚲Inventory List</a>
+        <a href="/Rental/Index">📋🚴‍♂️Rental List</a>
+        <a href="/Home/ViewContactMessages">📨Contact Us Messages</a>
+        <a href="/Rental/ViewRentedBikes"> 🚴‍Rented Bikes</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>@ViewData["Title"]</h1>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Customer Name</th>
+                        <th>Email</th>
+                        <th>Bike Rented</th>
+                        <th>Date Rented</th>
+                        <th>Due Date</th>
+                        <th>Status</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var rental in Model)
+                    {
+                        <tr>
+                            <td>@rental.Id</td>
+                            <td>@rental.Name</td>
+                            <td>@rental.Email</td>
+                            <td>@rental.BikeRented</td>
+                            <td>@rental.DateRented.ToShortDateString()</td>
+                            <td>@rental.DueDate.ToShortDateString()</td>
+                            <td>@rental.AvailabilityStatus</td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

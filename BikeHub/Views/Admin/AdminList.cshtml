@@ -2,86 +2,202 @@
 @{
     ViewData["Title"] = "Search Customer";
 }
+<style>
+    /* Flexbox container for Sidebar and Main Content */
+    .container-dashboard {
+        display: flex;
+        min-height: 100vh;
+    }
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card mb-3">
-                <div class="card-header bg-primary text-white">
-                    Search Customer
-                </div>
-                <div class="card-body">
-                    @if (TempData["Message"] != null)
-                    {
-                        <div class="alert alert-danger" role="alert">
-                            @TempData["Message"]
-                        </div>
-                    }
-                    <form asp-action="SearchCustomer" method="post" class="d-flex align-items-center gap-3">
-                        <div class="form-group d-flex align-items-center">
-                            <label for="searchType" class="form-label me-2 mb-0">Search by:</label>
-                            <select class="form-select" id="searchType" name="searchType" required>
-                                <option value="StudentId">ID</option>
-                                <option value="Name">Name</option>
-                                <option value="Email">Email</option>
-                            </select>
-                        </div>
-                        <div class="form-group d-flex align-items-center">
-                            <label for="searchTerm" class="form-label me-2 mb-0">Enter search term:</label>
-                            <input type="text" class="form-control" id="searchTerm" name="searchTerm" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </form>
-                </div>
-            </div>
-        </div>
+    /* Sidebar Styles */
+    .sidebar {
+        width: 250px;
+        background-color: darkblue;
+        padding: 20px 0;
+        height: 100vh;
+        overflow-y: auto;
+        flex-shrink: 0;
+    }
+
+        .sidebar a {
+            display: block;
+            color: #ffffff;
+            padding: 1px 2px;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+            .sidebar a:hover {
+                background-color: lightblue;
+            }
+
+
+    /* Sidebar Styles */
+    .sidebar {
+        width: 276px;
+        background-color: #003366;
+        padding: 20px 0;
+        height: 100vh; 
+        overflow-y: auto; 
+        flex-shrink: 0; 
+    }
+
+        .sidebar a {
+            display: block;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: solid;
+            font-size: 16px;
+        }
+
+            .sidebar a:hover {
+                background-color: blue;
+                width: 290px;
+                padding: 10px;
+                font-size: 22px;
+            }
+
+
+    /* Admin Clip Art */
+    .admin-image {
+        padding: 20px;
+        width: 80%;
+        border-radius: 33px;
+        margin-bottom: 2px;
+        margin-top: 7px;
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto; /* Center the image horizontally */
+    }
+
+    /* Main Content Styles */
+    .main-content {
+        flex-grow: 1; 
+        padding: 0px;
+        background-color: #f8f9fa;
+    }
+
+    /* Table Styles */
+    .table-responsive {
+        overflow-x: auto;
+    }
+
+    .card {
+        margin-bottom: 2px;
+    }
+
+    .card-header {
+        background-color: #007bff;
+        color: #fff;
+    }
+
+    .table thead th {
+        background-color: blue;
+        color: #fff;
+    }
+
+</style>
+
+<!-- Flexbox Container for Sidebar and Main Content -->
+<div class="container-dashboard">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="~/img/Ad2.png" alt="Admin img" class="admin-image" />
+        <h4 class="text-center text-white">BikeHub Admin</h4>
+        <a href="/Admin/login">🔓Login</a>
+        <a href="/Admin/AdminList">📋 👩🏽‍💻Customer List</a>
+        <a href="/admin/inventory-list">📋🚲Inventory List</a>
+        <a href="/Rental/Index">📋🚴‍♂️Rental List</a>
+        <a href="/Home/ViewContactMessages">📨Contact Us Messages</a>
+        <a href="/Rental/ViewRentedBikes"> 🚴‍Rented Bikes</a>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col-md-10">
-            <div class="card">
-                <div class="card-header bg-primary text-white">
-                    All Customers Registered
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container mt-5">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-header bg-primary text-white">
+                            Search Customer
+                        </div>
+                        <div class="card-body">
+                            @if (TempData["Message"] != null)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    @TempData["Message"]
+                                </div>
+                            }
+                            <form asp-action="SearchCustomer" method="post" class="d-flex align-items-center gap-3">
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="searchType" class="form-label me-2 mb-0">Search by:</label>
+                                    <select class="form-select" id="searchType" name="searchType" required>
+                                        <option value="StudentId">ID</option>
+                                        <option value="Name">Name</option>
+                                        <option value="Email">Email</option>
+                                    </select>
+                                </div>
+                                <div class="form-group d-flex align-items-center">
+                                    <label for="searchTerm" class="form-label me-2 mb-0">Enter search term:</label>
+                                    <input type="text" class="form-control" id="searchTerm" name="searchTerm" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>Student ID</th>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Email</th>
-                                    <th>Campus Name</th>
-                                    <th>Phone Number</th>
-                                    <th>Emergency Contact Name</th>
-                                    <th>Emergency Contact Number</th>
-                                    <th>Type of Customer</th>
-                                    <th>Type of Rider</th>
-                                    <th>Terms and Conditions Agreement</th>
-                                    <th>Email Subscription</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var customer in Model)
-                                {
-                                    <tr>
-                                        <td>@customer.StudentId</td>
-                                        <td>@customer.FirstName</td>
-                                        <td>@customer.LastName</td>
-                                        <td>@customer.Email</td>
-                                        <td>@customer.CampusName</td>
-                                        <td>@customer.PhoneNumber</td>
-                                        <td>@customer.EmergencyContactName</td>
-                                        <td>@customer.EmergencyContactNum</td>
-                                        <td>@customer.TypeOfCustomer</td>
-                                        <td>@customer.TypeOfRider</td>
-                                        <td>@customer.TAndCAgreement</td>
-                                        <td>@customer.EmailSubscription</td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table>
+            </div>
+
+            <!-- Table of All Registered Customers -->
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="card">
+                        <div class="card-header bg-primary text-white">
+                            All Customers Registered
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th>Student ID</th>
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
+                                            <th>Email</th>
+                                            <th>Campus Name</th>
+                                            <th>Phone Number</th>
+                                            <th>Emergency Contact Name</th>
+                                            <th>Emergency Contact Number</th>
+                                            <th>Type of Customer</th>
+                                            <th>Type of Rider</th>
+                                            <th>Terms and Conditions Agreement</th>
+                                            <th>Email Subscription</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var customer in Model)
+                                        {
+                                            <tr>
+                                                <td>@customer.StudentId</td>
+                                                <td>@customer.FirstName</td>
+                                                <td>@customer.LastName</td>
+                                                <td>@customer.Email</td>
+                                                <td>@customer.CampusName</td>
+                                                <td>@customer.PhoneNumber</td>
+                                                <td>@customer.EmergencyContactName</td>
+                                                <td>@customer.EmergencyContactNum</td>
+                                                <td>@customer.TypeOfCustomer</td>
+                                                <td>@customer.TypeOfRider</td>
+                                                <td>@customer.TAndCAgreement</td>
+                                                <td>@customer.EmailSubscription</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

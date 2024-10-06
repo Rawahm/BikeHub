@@ -5,81 +5,151 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<style>
-    /* General styling for the container */
-    .contact-messages-container {
-        max-width: 1200px;
-        margin: 50px auto;
-        padding: 20px;
-        background-color: #f8f9fa;
-        border-radius: 8px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    }
-
-    h2 {
-        font-size: 28px;
-        font-weight: bold;
-        color: #343a40;
-        margin-bottom: 20px;
-        text-align: center;
-    }
-
-    /* Table styling */
-    .table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-bottom: 20px;
-        background-color: #fff;
-    }
-
-        .table thead {
-            background-color: #a97bff;
-            color: white;
-            font-size: 18px;
+<head>
+    <style>
+        /* Flexbox container for Sidebar and Main Content */
+        .container-dashboard {
+            display: flex;
+            min-height: 100vh;
         }
 
-        .table th, .table td {
-            padding: 15px;
-            text-align: left;
-            border: 1px solid #dee2e6;
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background-color: #003366;
+            padding: 20px 0;
+            height: 100vh;
+            overflow-y: auto;
+            flex-shrink: 0;
         }
 
-        .table tbody tr:nth-child(odd) {
-            background-color: #f2f2f2;
-        }
-
-        .table tbody tr:nth-child(even) {
-            background-color: #e9ecef;
-        }
-
-        .table td {
-            font-size: 16px;
-            color: #333;
-        }
-</style>
-
-<div class="contact-messages-container">
-    <h2>Contact Messages</h2>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Message</th>
-                <th>Date </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var message in Model)
-            {
-                <tr>
-                    <td>@message.Name</td>
-                    <td>@message.Email</td>
-                    <td>@message.Message</td>
-                    <td>@message.SubmittedDate.ToString("MM/dd/yyyy")</td>
-                </tr>
+            .sidebar a {
+                display: block;
+                color: #ffffff;
+                padding: 10px 20px;
+                text-decoration: none;
+                font-size: 16px;
             }
-        </tbody>
-    </table>
+
+                .sidebar a:hover {
+                    background-color: blue;
+                    width: 290px;
+                    padding: 10px;
+                    font-size: 22px;
+                }
+
+
+        /* Admin Clip Art */
+        .admin-image {
+            padding: 20px;
+            width: 80%;
+            border-radius: 33px;
+            margin-bottom: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex-grow: 1; /* Main content takes remaining space */
+            padding: 40px;
+            background-color: #f8f9fa;
+        }
+
+        /* General styling for the contact messages container */
+        .contact-messages-container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: bold;
+            color: #343a40;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Table styling */
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: #fff;
+        }
+
+            .table thead {
+                background-color: #a97bff;
+                color: white;
+                font-size: 18px;
+            }
+
+            .table th, .table td {
+                padding: 15px;
+                text-align: left;
+                border: 1px solid #dee2e6;
+            }
+
+            .table tbody tr:nth-child(odd) {
+                background-color: #f2f2f2;
+            }
+
+            .table tbody tr:nth-child(even) {
+                background-color: #e9ecef;
+            }
+
+            .table td {
+                font-size: 16px;
+                color: #333;
+            }
+    </style>
+</head>
+
+<!-- Flexbox Container for Sidebar and Main Content -->
+<div class="container-dashboard">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <img src="~/img/Ad2.png" alt="Admin img" class="admin-image" />
+        <h4 class="text-center text-white">BikeHub Admin</h4>
+        <a href="/Admin/login">🔓Login</a>
+        <a href="/Admin/AdminList">📋 👩🏽‍💻Customer List</a>
+        <a href="/admin/inventory-list">📋🚲Inventory List</a>
+        <a href="/Rental/Index">📋🚴‍♂️Rental List</a>
+        <a href="/Home/ViewContactMessages">📨Contact Us Messages</a>
+        <a href="/Rental/ViewRentedBikes">🚴‍Rented Bikes</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="contact-messages-container">
+            <h2>Contact Messages</h2>
+
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var message in Model)
+                    {
+                        <tr>
+                            <td>@message.Name</td>
+                            <td>@message.Email</td>
+                            <td>@message.Message</td>
+                            <td>@message.SubmittedDate.ToString("MM/dd/yyyy")</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
