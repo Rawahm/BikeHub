@@ -1,0 +1,23 @@
+﻿@{
+    ViewData["Title"] = "Success";
+}
+
+<h3>Success</h3>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<p>
+    <a asp-action="Index" asp-controller="Inventory" class="btn btn-primary">Return to Inventory List</a>
+</p>
+<p>
+    <a asp-action="CreateInventory" asp-controller="Inventory" class="btn btn-primary">Add Inventory</a>
+</p>
+
+<p>
+    <a asp-action="Dashboard" asp-controller="Admin" class="btn btn-primary"> Admin Dashboard</a>
+</p>

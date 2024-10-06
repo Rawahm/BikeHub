@@ -1,0 +1,234 @@
+﻿@model BikeHub.Models.InventoryViewModel
+
+@{
+    ViewData["Title"] = "Create Inventory";
+}
+<body>
+    <h2 class="form-title">Create Inventory</h2>
+
+    <div class="form-container">
+        <form asp-action="CreateInventory" method="post">
+            <div class="form-group">
+                <label for="ItemType">Item Type</label>
+                <select asp-for="ItemType" class="form-control" required>
+                    <option value="Bike">Bike</option>
+                    <option value="Lock">Lock</option>
+                    <option value="Key">Key</option>
+                    <option value="Basket">Basket</option>
+                    <option value="Lights">Lights</option>
+                </select>
+                <span asp-validation-for="ItemType" class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="ItemNumber">Item Number</label>
+                <input type="text" asp-for="ItemNumber" class="form-control" required />
+                <span asp-validation-for="ItemNumber" class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="Condition">Condition</label>
+                <input type="text" asp-for="Condition" class="form-control" required />
+                <span asp-validation-for="Condition" class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="Price">Price</label>
+                <input type="number" asp-for="Price" class="form-control" step="0.01" required />
+                <span asp-validation-for="Price" class="error-message"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="AvailabilityStatus">Availability Status</label>
+                <select id="AvailabilityStatus" asp-for="AvailabilityStatus" class="form-control" required onchange="showRetiredOptions()">
+                    <option value="Available">Available</option>
+                    <option value="Retired">Retired</option>
+                    <option value="Rented">Rented</option>
+                </select>
+                <span asp-validation-for="AvailabilityStatus" class="error-message"></span>
+            </div>
+
+            <div class="form-group" id="retiredOptions" style="display: none;">
+                <label for="RetiredOptions">Retired Reason</label>
+                <select asp-for="RetiredOptions" class="form-control">
+                    <option value="Renamed">Renamed</option>
+                    <option value="Damaged">Damaged</option>
+                    <option value="Stolen">Stolen</option>
+                    <option value="Lost">Lost</option>
+                    <option value="Selling">Selling</option>
+                </select>
+                <span asp-validation-for="RetiredOptions" class="error-message"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label for="Comments">Comments</label>
+                <textarea asp-for="Comments" class="form-control" rows="4"></textarea>
+                <span asp-validation-for="Comments" class="error-message"></span>
+            </div>
+
+            <div class="form-group text-center">
+                <button type="submit" class="btn-submit">Add Inventory</button>
+            </div>
+        </form>
+    </div>
+</body>
+<style>
+    
+    form {
+        max-width: 500px;
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #666;
+    }
+
+    input[type="text"],
+     select,
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+        color: #333;
+    }
+
+    select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="%23333"><path d="M7 10l5 5 5-5H7z"/></svg>');
+        background-repeat: no-repeat;
+        background-position-x: 97%;
+        background-position-y: 50%;
+        padding-right: 40px;
+    }
+
+    button[type="submit"] {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+    /* Style for checkboxes */
+    input[type="checkbox"] {
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+
+    .checkbox-label {
+        display: inline-block;
+        font-size: 14px;
+        color: #666;
+    }
+
+    /* Modal Styling */
+    .modal {
+        display: none; /* Ensure the modal is hidden by default */
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6); /* Dim background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        width: 80%;
+        max-width: 600px;
+        padding: 20px;
+        max-height: 80%;
+        overflow-y: auto; /* Allows scrolling for long waiver content */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        position: relative;
+    }
+
+    .modal-header {
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .modal-body {
+        font-size: 0.9rem;
+        color: #333;
+        line-height: 1.6;
+        padding-right: 10px;
+    }
+
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 1.5rem;
+        color: #666;
+        cursor: pointer;
+    }
+
+        .close:hover {
+            color: #333;
+        }
+
+    .modal-content::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    .modal-content::-webkit-scrollbar-thumb {
+        background-color: #007bff;
+        border-radius: 4px;
+    }
+
+    .modal-content::-webkit-scrollbar-track {
+        background-color: #f1f1f1;
+    }
+</style>
+
+<script>
+    // Retired options will be disapper this function allow them to show when stataus will be selected to be  Retired ONLY!!!
+    function showRetiredOptions() {
+        var availabilityStatus = document.getElementById("AvailabilityStatus").value;
+        var retiredOptions = document.getElementById("retiredOptions");
+        if (availabilityStatus === "Retired") {
+            retiredOptions.style.display = "block";
+        } else {
+            retiredOptions.style.display = "none";
+        }
+    }
+</script>

@@ -71,8 +71,7 @@ namespace BikeHub.Controllers
 
         public IActionResult Success()
         {
-            // Retrieve the success message from TempData
-            var successMessage = TempData["SuccessMessage"] as string;
+             var successMessage = TempData["SuccessMessage"] as string;
             return View("Success", successMessage); // Pass the message to the view
         }
 
