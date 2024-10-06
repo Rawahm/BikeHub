@@ -1,0 +1,53 @@
+﻿@model IEnumerable<BikeHub.Models.Inventory>
+
+@{
+    ViewData["Title"] = "Inventory Management";
+}
+<h2>Inventory Management</h2>
+
+<div>
+    <a asp-action="CreateInventory" class="btn btn-primary">Add Inventory</a>
+    <a asp-action="SearchInventory" class="btn btn-secondary">Search Inventory</a>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Item Number</th>
+            <th>Item Type</th>
+            <th>Condition</th>
+            <th>Price</th>
+            <th>Availability Status</th>
+            <th>Comments</th>
+            <th>Retired Options</th> <!-- New column header for Retired Options -->
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ItemNumber</td>
+                <td>@item.ItemType</td>
+                <td>@item.Condition</td>
+                <td>@item.Price.ToString("C")</td>
+                <td>@item.AvailabilityStatus</td>
+                <td>@item.Comments</td>
+                <td>
+                    @if (item.AvailabilityStatus == "Retired") // Check if AvailabilityStatus is "Retired"
+                    {
+                        <span>@item.RetiredOptions</span> <!-- Display RetiredOptions only if retired -->
+                    }
+                    else
+                    {
+                        <span>N/A</span> <!-- Display N/A if not available -->
+                    }
+                </td>
+                <td>
+                    <a asp-action="UpdateInventory" asp-route-id="@item.ItemId" class="btn btn-warning">Update</a>
+                    <a asp-action="ArchiveInventory" asp-route-id="@item.ItemId" class="btn btn-danger">Archive</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

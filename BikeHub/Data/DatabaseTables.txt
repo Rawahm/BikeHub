@@ -68,3 +68,24 @@ CREATE TABLE ContactUsMessages (
     Message NVARCHAR(MAX) NOT NULL,
     SubmittedDate DATETIME DEFAULT GETDATE()
 );
+
+
+------------------------------------------------------------------------------------------------------
+-- Create Inventory table
+Use bikehubdb;
+CREATE TABLE InventoryTable (
+    ItemId INT PRIMARY KEY IDENTITY(1,1),
+    ItemType NVARCHAR(100) NOT NULL,
+    ItemNumber NVARCHAR(50) NOT NULL,
+    Condition NVARCHAR(50) NOT NULL,
+    Price DECIMAL(18,2) NOT NULL,
+    AvailabilityStatus NVARCHAR(50) NOT NULL,
+    Comments NVARCHAR(500)
+);
+select * from InventoryTable;
+
+ALTER TABLE InventoryTable
+ADD RetiredOptions VARCHAR(255) NULL;
+ALTER TABLE InventoryTable ALTER COLUMN RetiredOptions VARCHAR(255) NULL;
+
+
