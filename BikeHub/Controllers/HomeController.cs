@@ -48,10 +48,10 @@ namespace BikeHub.Controllers
 
                 //  display a confirmation message 
                 TempData["Message"] = "Thank you for reaching out! We will get back to you soon.";
-                return RedirectToAction("Index");
+                return RedirectToAction("ContactUs");
             }
 
-            return View("Index");
+            return View("ContactUs");
         }
        
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
@@ -65,5 +65,11 @@ namespace BikeHub.Controllers
             var contactMessages = _db.ContactUsMessages.ToList();
             return View(contactMessages);
         }
+        [HttpGet]
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+
     }
 }
