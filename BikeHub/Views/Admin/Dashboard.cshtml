@@ -1,0 +1,136 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+
+}
+
+
+<style>
+    .container {
+        display: flex; /* Use flexbox for layout */
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+        width: 257px;
+        background-color: darkblue;
+        padding: 20px 0;
+        height: 80vh; /* Full height for sidebar */
+        display: grid;
+        overflow-y: auto; /* Scroll if content exceeds height */
+    }
+
+        .sidebar a {
+            display: block;
+            color: #ffffff;
+            padding: 10px 20px;
+            text-decoration: solid;
+            font-size: 16px;
+            border-bottom: 1px solid double;
+        }
+
+            .sidebar a:hover {
+                background-color: blue;
+                width: 290px;
+                padding: 10px;
+                font-size: 22px;
+            }
+
+    /* Main Content Styles */
+    .main-content {
+        flex-grow: 1;
+        padding: 80px;
+        background-color: #f8f9fa;
+        min-height: 10vh;
+    }
+
+        .main-content h1 {
+            margin-bottom: 30px;
+        }
+
+    /* Navigate BAR Styles */
+    .navbar {
+        background-color: aliceblue;
+        color: #ffffff;
+        padding: 10px;
+        position: fixed;
+        width: 100%; /* make navbar full width on page */
+        top: 0;
+        z-index: 2; /* keep it on the top of other content */
+    }
+    /* Sidebar Styles */
+    .sidebar {
+        width: 290px;
+        background-color: #003366; /* Dark blue for professionalism */
+        padding: 20px;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        color: white;
+    }
+
+    /* Admin  img from Clip Art */
+    .admin-image {
+        padding: 20px;
+        width: 80%; 
+        border-radius: 35px; 
+        margin-bottom: 1px;
+        margin-top: 7px;
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin-left:25px;
+    }
+
+</style>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+    <div class="container-fluid">
+
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <ul class="navbar-nav flex-grow-1">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Customer" asp-action="Register">Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Dashboard">Admin Dashboard</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!--  Container for Sidebar and Main Content -->
+<!--    This  contianer used to let both elements aligen beside each other-->
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <p></p>
+        <p></p>
+        <p></p>
+        <p></p>
+        <img src="~/img/Ad2.png" alt="Admin img" class="admin-image" />
+        <h4 class="text-center text-white">BikeHub Admin</h4>
+        <a href="/Admin/login">🔓Login</a>
+        <a href="/Admin/AdminList">📋 👩🏽‍💻Customer List</a>
+        <a href="/admin/inventory-list">📋🚲Inventory List</a>
+        <a href="/Rental/Index">📋🚴‍♂️Rental List</a>
+        <a href="/Home/ViewContactMessages">📨Contact Us Messages</a>
+        <a href="/Rental/ViewRentedBikes"> 🚴‍Rented Bikes</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <p style="color:blueviolet"> --Show When Admin Successflly login--</p>
+        <h1>Welcome to the Admin Dashboard</h1>
+        <p>Select an option from the sidebar to manage BikeHub's services.</p>
+    </div>
+</div>
+
+
