@@ -1,6 +1,7 @@
 ﻿using BikeHub.Data;
 using BikeHub.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BikeHub.Controllers
 {
@@ -135,6 +136,17 @@ namespace BikeHub.Controllers
 
             return View(model);
 
+        }
+        // GET: Inventory/Search
+        public IActionResult Search(string searchTerm)
+        {
+            var inventoryItems = string.IsNullOrWhiteSpace(searchTerm)
+            ? Enumerable.Empty<Inventory>()
+                : dbContext.InventoryTable
+                    .Where(i => i.ItemType.Contains(searchTerm) || i.ItemNumber.ToString().Contains(searchTerm))
+                    .ToList();
+
+            return View("Index", inventoryItems);
         }
 
         // GET: Inventory/UpdateSuccess

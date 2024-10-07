@@ -3,56 +3,199 @@
 @{
     ViewData["Title"] = "Inventory Management";
 }
-<h2>Inventory Management</h2>
 
-<div>
-    <a asp-action="CreateInventory" class="btn btn-primary">Add Inventory</a>
-    <a asp-action="SearchInventory" class="btn btn-secondary">Search Inventory</a>
-    <a asp-action="ArchivedItems" class="btn btn-secondary">Archived Inventory</a>
+<style>
+    #searchForm {
+        display: none;
+    }
 
+        /* Optional: You can add custom styling for the search form when it's visible */
+        #searchForm.visible {
+            display: block;
+            margin-top: 20px;
+        }
+
+    body {
+        background-color: #f8f9fa;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        margin-top: 20px;
+    }
+
+    h2 {
+        color: #343a40;
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .btn {
+        margin-right: 10px;
+    }
+
+    .card {
+        border: 1px solid #ced4da;
+        border-radius: 8px;
+    }
+
+    input[type="text"]{
+        width:25%;
+    }
+    .card-header {
+        background-color: #008cfa;
+        color: white;
+        font-weight: bold;
+    }
+
+    .table {
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th {
+        background-color: #e9ecef;
+        color: #343a40;
+        padding: 10px;
+    }
+
+    td {
+        padding: 10px;
+        vertical-align: middle;
+    }
+
+    .input-group {
+        justify-content: center; /* Center the input group */
+    }
+
+        .input-group .form-control {
+            border-radius: 10px;
+            width: 20px; 
+            padding: 5px;
+        }
+
+        .input-group .btn {
+            border-radius: 10px;
+            background-color: #007bff;
+            color: white;
+            padding: 5px 15px;
+            transition: background-color 0.3s;
+        }
+
+            .input-group .btn:hover {
+                background-color: #0056b3;
+            }
+
+    .btn-primary, .btn-warning {
+        transition: background-color 0.3s;
+    }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+</style>
+
+<div class="container">
+    <h2>Inventory Management</h2>
+
+    <div class="mb-4 text-center">
+        <a asp-action="CreateInventory" class="btn btn-primary">Add Inventory</a>
+        <a asp-action="Index" class="btn btn-primary">All Listed Records</a>
+        <a asp-action="ArchivedItems" class="btn btn-primary">Archived Inventory</a>
+        <button id="toggleSearch" class="btn btn-primary">Search Inventory</button> 
+
+    </div>
+
+    <!-- Search Form (Initially hidden) -->
+    <div id="searchForm" class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0">Search Inventory</h5>
+        </div>
+        <div class="card-body">
+            <form method="get" asp-action="Search">
+                <div class="input-group mb-3">
+                    <input type="text" name="searchTerm" class="form-control" placeholder="Search by Item Type or Item Number" value="@Context.Request.Query["searchTerm"]" required />
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">Inventory List</h5>
+        </div>
+        <div class="card-body">
+            @if (!Model.Any())
+            {
+                <div class="alert alert-warning text-center" role="alert">
+                    No records found matching your search term.
+                </div>
+            }
+            else
+            {
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Item Number</th>
+                            <th>Item Type</th>
+                            <th>Condition</th>
+                            <th>Price</th>
+                            <th>Availability Status</th>
+                            <th>Comments</th>
+                            <th>Retired Options</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ItemNumber</td>
+                                <td>@item.ItemType</td>
+                                <td>@item.Condition</td>
+                                <td>@item.Price.ToString("C")</td>
+                                <td>@item.AvailabilityStatus</td>
+                                <td>@item.Comments</td>
+                                <td>
+                                    @if (item.AvailabilityStatus == "Retired")
+                                    {
+                                        <span>@item.RetiredOptions</span>
+                                    }
+                                    else
+                                    {
+                                        <span>N/A</span>
+                                    }
+                                </td>
+                                <td>
+                                    <a asp-action="UpdateInventory" asp-route-id="@item.ItemId" class="btn btn-primary">Update</a>
+                                    <a href="@Url.Action("ArchiveInventory", new { id = item.ItemId })"
+                                       onclick="return confirm('Are you sure you want to archive this item? Remember you can restore this record later!');"
+                                       class="btn btn-warning">Archive</a>
+                                </td>
+                            </tr>
+                        }
+                        
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
 </div>
 
-
-<table class="table">
-    <thead>
-        <tr>
-            <th>Item Number</th>
-            <th>Item Type</th>
-            <th>Condition</th>
-            <th>Price</th>
-            <th>Availability Status</th>
-            <th>Comments</th>
-            <th>Retired Options</th> 
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.ItemNumber</td>
-                <td>@item.ItemType</td>
-                <td>@item.Condition</td>
-                <td>@item.Price.ToString("C")</td>
-                <td>@item.AvailabilityStatus</td>
-                <td>@item.Comments</td>
-                <td>
-                    @if (item.AvailabilityStatus == "Retired")
-                    {
-                        <span>@item.RetiredOptions</span>
-                    }
-                    else
-                    {
-                        <span>N/A</span> 
-                    }
-                </td>
-                <td>
-                    <a asp-action="UpdateInventory" asp-route-id="@item.ItemId" class="btn btn-primary">Update</a>
-                    <a href="@Url.Action("ArchiveInventory", new { id = item.ItemId })"
-                       onclick="return confirm('Are you sure you want to archive this item? Rember you can restore this record later!.');"
-                       class="btn btn-warning">Archive</a>
-                </td>
-            </tr>
+<script>
+    document.getElementById("toggleSearch").addEventListener("click", function () {
+        var searchForm = document.getElementById("searchForm");
+        // Toggle the 'visible' class to show or hide the form
+        if (searchForm.style.display === "none" || searchForm.style.display === "") {
+            searchForm.style.display = "block";
+        } else {
+            searchForm.style.display = "none";
         }
-    </tbody>
-</table>
+    });
+</script>
