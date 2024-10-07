@@ -8,7 +8,10 @@
 <div>
     <a asp-action="CreateInventory" class="btn btn-primary">Add Inventory</a>
     <a asp-action="SearchInventory" class="btn btn-secondary">Search Inventory</a>
+    <a asp-action="ArchivedItems" class="btn btn-secondary">Archived Inventory</a>
+
 </div>
+
 
 <table class="table">
     <thead>
@@ -19,7 +22,7 @@
             <th>Price</th>
             <th>Availability Status</th>
             <th>Comments</th>
-            <th>Retired Options</th> <!-- New column header for Retired Options -->
+            <th>Retired Options</th> 
             <th>Actions</th>
         </tr>
     </thead>
@@ -34,19 +37,19 @@
                 <td>@item.AvailabilityStatus</td>
                 <td>@item.Comments</td>
                 <td>
-                    @if (item.AvailabilityStatus == "Retired") // Check if AvailabilityStatus is "Retired"
+                    @if (item.AvailabilityStatus == "Retired")
                     {
-                        <span>@item.RetiredOptions</span> <!-- Display RetiredOptions only if retired -->
+                        <span>@item.RetiredOptions</span>
                     }
                     else
                     {
-                        <span>N/A</span> <!-- Display N/A if not available -->
+                        <span>N/A</span> 
                     }
                 </td>
                 <td>
-                    <a asp-action="UpdateInventory" asp-route-id="@item.ItemId" class="btn btn-warning">Update</a>
+                    <a asp-action="UpdateInventory" asp-route-id="@item.ItemId" class="btn btn-primary">Update</a>
                     <a href="@Url.Action("ArchiveInventory", new { id = item.ItemId })"
-                       onclick="return confirm('Are you sure you want to archive this item? This action cannot be undone.');"
+                       onclick="return confirm('Are you sure you want to archive this item? Rember you can restore this record later!.');"
                        class="btn btn-warning">Archive</a>
                 </td>
             </tr>

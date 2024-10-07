@@ -4,10 +4,17 @@
     ViewData["Title"] = "Archived Inventory";
 }
 
+<!-- Navigation Buttons! -->
+<div class="mb-3">
+    <a asp-action="Index" class="btn btn-primary">Inventory List</a>
+    <a asp-action="CreateInventory" class="btn btn-secondary">Add New Item</a>
+</div>
 <h2>Archived Inventory Items</h2>
 
+
+
 <table class="table">
-    <thead>
+    <thead style="background-color:aliceblue">
         <tr>
             <th>Item ID</th>
             <th>Item Type</th>
@@ -36,6 +43,8 @@
                 <td>@item.ArchivedDate</td>
                 <td>
                     <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteItem(@item.ItemId);">Delete</a>
+                    <a href="javascript:void(0);" class="btn btn-success" onclick="restoreItem(@item.ItemId);">Restore</a>
+
                 </td>
             </tr>
         }
@@ -58,4 +67,19 @@
             });
         }
     }
+    function restoreItem(id) {
+        if (confirm('Are you sure you want to restore this item?')) {
+            $.ajax({
+                url: '@Url.Action("RestoreInventory", "Inventory")/' + id,
+                type: 'POST',
+                success: function () {
+                    location.reload(); // Reloads the page to reflect the changes
+                },
+                error: function () {
+                    alert('Error restoring item. Please try again.');
+                }
+            });
+        }
+    }
+
 </script>

@@ -156,6 +156,41 @@ namespace BikeHub.Controllers
             return Ok(); // ** in the sript side it will upload the page with the new view taht does not include the deleted record  **
         }
 
+        // POST: Inventory/RestoreInventory/{id}
+        [HttpPost]
+        public async Task<IActionResult> RestoreInventory(int id)
+        {
+            // Find the archived item
+            var archivedItem = await dbContext.ArchivedInventory.FindAsync(id);
+            if (archivedItem == null)
+            {
+                return NotFound();
+            }
+
+            // Create a new inventory item from the archived item
+            var inventoryItem = new Inventory
+            {
+                ItemType = archivedItem.ItemType,
+                ItemNumber = archivedItem.ItemNumber,
+                Condition = archivedItem.Condition,
+                Price = archivedItem.Price,
+                AvailabilityStatus = "Available", // Set appropriate status
+                Comments = archivedItem.Comments,
+                RetiredOptions = archivedItem.RetiredOptions
+                // Note: Do not set ItemId here; let it auto-generate
+            };
+
+            // Add the new inventory item to the InventoryTable
+            await dbContext.InventoryTable.AddAsync(inventoryItem);
+
+            // Optionally, remove the archived item if needed
+            dbContext.ArchivedInventory.Remove(archivedItem);
+
+            // Save changes to both tables
+            await dbContext.SaveChangesAsync();
+
+            return Ok(); // Return success response
+        }
 
 
 
