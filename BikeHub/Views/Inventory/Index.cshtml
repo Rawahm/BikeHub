@@ -45,7 +45,9 @@
                 </td>
                 <td>
                     <a asp-action="UpdateInventory" asp-route-id="@item.ItemId" class="btn btn-warning">Update</a>
-                    <a asp-action="ArchiveInventory" asp-route-id="@item.ItemId" class="btn btn-danger">Archive</a>
+                    <a href="@Url.Action("ArchiveInventory", new { id = item.ItemId })"
+                       onclick="return confirm('Are you sure you want to archive this item? This action cannot be undone.');"
+                       class="btn btn-warning">Archive</a>
                 </td>
             </tr>
         }

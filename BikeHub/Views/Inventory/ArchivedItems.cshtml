@@ -1,0 +1,61 @@
+﻿@model IEnumerable<BikeHub.Models.ArchivedInventory>
+
+@{
+    ViewData["Title"] = "Archived Inventory";
+}
+
+<h2>Archived Inventory Items</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Item ID</th>
+            <th>Item Type</th>
+            <th>Item Number</th>
+            <th>Condition</th>
+            <th>Price</th>
+            <th>Availability Status</th>
+            <th>Comments</th>
+            <th>Retired Options</th>
+            <th>Archived Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ItemId</td>
+                <td>@item.ItemType</td>
+                <td>@item.ItemNumber</td>
+                <td>@item.Condition</td>
+                <td>@item.Price</td>
+                <td>@item.AvailabilityStatus</td>
+                <td>@item.Comments</td>
+                <td>@(item.RetiredOptions ?? "N/A")</td>
+                <td>@item.ArchivedDate</td>
+                <td>
+                    <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteItem(@item.ItemId);">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function deleteItem(id) {
+        if (confirm('Are you sure you want to delete this item?')) {
+            $.ajax({
+                url: '@Url.Action("DeleteInventory", "Inventory")/' + id,
+                type: 'POST',
+                success: function () {
+                    location.reload(); // Upload the page to updates the changes
+                },
+                error: function () {
+                    alert('Error deleting item. Please try again.');
+                }
+            });
+        }
+    }
+</script>

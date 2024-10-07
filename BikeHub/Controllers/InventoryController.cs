@@ -56,7 +56,7 @@ namespace BikeHub.Controllers
                 {
                     await dbContext.SaveChangesAsync();
                     TempData["SuccessMessage"] = "New inventory item added successfully.";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("Success");
                 }
                 catch (Exception ex)
                 {
@@ -142,7 +142,25 @@ namespace BikeHub.Controllers
         {
             return View();
         }
-        // GET: Inventory/ArchiveInventory/{id}
+        // GET: Inventory/DeleteInventory/{id}
+            
+        [HttpPost]
+        public async Task<IActionResult> DeleteInventory(int id)
+        {
+            var inventoryItem = await dbContext.ArchivedInventory.FindAsync(id);
+            if (inventoryItem != null)
+            {
+                dbContext.ArchivedInventory.Remove(inventoryItem);
+                await dbContext.SaveChangesAsync();
+            }
+            return Ok(); // ** in the sript side it will upload the page with the new view taht does not include the deleted record  **
+        }
+
+
+
+
+
+
         public async Task<IActionResult> ArchiveInventory(int id)
         {
             var inventoryItem = await dbContext.InventoryTable.FindAsync(id);
@@ -151,9 +169,43 @@ namespace BikeHub.Controllers
                 return NotFound();
             }
 
+            // Create an archived item
+            var archivedItem = new ArchivedInventory
+            {
+                ItemId = inventoryItem.ItemId,
+                ItemType = inventoryItem.ItemType,
+                ItemNumber = inventoryItem.ItemNumber,
+                Condition = inventoryItem.Condition,
+                Price = inventoryItem.Price,
+                AvailabilityStatus = inventoryItem.AvailabilityStatus,
+                Comments = inventoryItem.Comments,
+                RetiredOptions = inventoryItem.RetiredOptions,
+                ArchivedDate = DateTime.Now
+
+                //  ArchivedDate = inventoryItem.ArchivedDate
+            };
+
+            // Remove from the main inventory table
             dbContext.InventoryTable.Remove(inventoryItem);
+
+            // Add to the archived inventory table
+            await dbContext.ArchivedInventory.AddAsync(archivedItem);
+
             await dbContext.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("ArchivedItems"); // Redirect after archiving
+        }
+
+        // GET: Inventory/ArchivedItems
+        public IActionResult ArchivedItems()
+        {
+            var archivedItems = dbContext.ArchivedInventory.ToList(); // Fetch archived items
+            return View(archivedItems);
+        }
+        public IActionResult Success()
+        {
+            // Retrieve the success message from TempData
+            var successMessage = TempData["SuccessMessage"] as string;
+            return View("Success", successMessage); // Pass the message to the view
         }
     }
 }

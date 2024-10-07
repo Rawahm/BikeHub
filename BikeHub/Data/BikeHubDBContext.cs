@@ -14,6 +14,8 @@ namespace BikeHub.Data
         public DbSet<ArchiveCustomer> ArchiveCustomer { get; set; } // Add this DbSet for the archive table
         public DbSet<ContactUs> ContactUsMessages { get; set; } //  this for ConatctUs table 
         public DbSet<Inventory> InventoryTable { get; set; }
+        public DbSet<ArchivedInventory> ArchivedInventory { get; set; } 
+
 
     }
 }
