@@ -27,7 +27,7 @@ namespace BikeHub.Models
 
 
         public string Comments { get; set; }
-        public string RetiredOptions { get; set; } //  property for retired options
+        public string? RetiredOptions { get; set; } //  property for retired options & accept NULL value only when Retired selected
 
     }
 }

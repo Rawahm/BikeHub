@@ -19,13 +19,13 @@ namespace BikeHub.Controllers
             this.dbContext = dbContext;
 
         }
-        // /Inventory
+        // GET: Inventory/Index
         public IActionResult Index()
         {
-            var inventoryList = dbContext.InventoryTable.ToList(); // Select  all inventory items from the database
+            var inventoryList = dbContext.InventoryTable.ToList(); // Select all inventory items
             return View(inventoryList);
-            // return View();
         }
+
         // GET: Inventory/CreateInventory
         public IActionResult CreateInventory()
         {
@@ -48,17 +48,15 @@ namespace BikeHub.Controllers
                     Price = model.Price,
                     AvailabilityStatus = model.AvailabilityStatus,
                     Comments = model.Comments,
-                    RetiredOptions = model.RetiredOptions
-
+                    RetiredOptions = model.AvailabilityStatus == "Retired" ? model.RetiredOptions : null  // Only set RetiredOptions if retired
                 };
 
                 await dbContext.InventoryTable.AddAsync(inventory);
-
                 try
                 {
-                    await dbContext.SaveChangesAsync();  // Use await here
-                    TempData["SuccessMessage"] = "New inventory item added successfully."; // Set success message
-                    return RedirectToAction("Success");  // Redirect to success page
+                    await dbContext.SaveChangesAsync();
+                    TempData["SuccessMessage"] = "New inventory item added successfully.";
+                    return RedirectToAction("Index");
                 }
                 catch (Exception ex)
                 {
@@ -69,12 +67,93 @@ namespace BikeHub.Controllers
             return View(model);
         }
 
-        public IActionResult Success()
+        // GET: Inventory/UpdateInventory/{id}
+        public async Task<IActionResult> UpdateInventory(int id)
         {
-             var successMessage = TempData["SuccessMessage"] as string;
-            return View("Success", successMessage); // Pass the message to the view
+            var inventoryItem = await dbContext.InventoryTable.FindAsync(id);
+            if (inventoryItem == null)
+            {
+                return NotFound();
+            }
+
+            var model = new InventoryViewModel
+            {
+                ItemId = inventoryItem.ItemId,
+                ItemType = inventoryItem.ItemType,
+                ItemNumber = inventoryItem.ItemNumber,
+                Condition = inventoryItem.Condition,
+                Price = inventoryItem.Price,
+                AvailabilityStatus = inventoryItem.AvailabilityStatus,
+                Comments = inventoryItem.Comments,
+                RetiredOptions = inventoryItem.RetiredOptions
+            };
+
+            return View(model);
         }
 
+        // POST: Inventory/UpdateInventory
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateInventory(InventoryViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var inventoryItem = await dbContext.InventoryTable.FindAsync(model.ItemId);
+                if (inventoryItem == null)
+                {
+                    return NotFound();
+                }
 
+                inventoryItem.ItemType = model.ItemType;
+                inventoryItem.ItemNumber = model.ItemNumber;
+                inventoryItem.Condition = model.Condition;
+                inventoryItem.Price = model.Price;
+                inventoryItem.AvailabilityStatus = model.AvailabilityStatus;
+                inventoryItem.Comments = model.Comments;
+
+                // Only set RetiredOptions if the AvailabilityStatus is "Retired"
+                if (model.AvailabilityStatus == "Retired")
+                {
+                    inventoryItem.RetiredOptions = model.RetiredOptions;
+                }
+                else
+                {
+                    inventoryItem.RetiredOptions = null; // Clear RetiredOptions if not retired
+                }
+
+                try
+                {
+                    await dbContext.SaveChangesAsync();
+                    //  TempData["SuccessMessage"] = "Inventory item updated successfully.";
+                    return RedirectToAction("UpdateSuccess");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "Error updating inventory: " + ex.Message);
+                }
+            }
+
+            return View(model);
+
+        }
+
+        // GET: Inventory/UpdateSuccess
+        public IActionResult UpdateSuccess()
+        {
+            return View();
+        }
+        // GET: Inventory/ArchiveInventory/{id}
+        public async Task<IActionResult> ArchiveInventory(int id)
+        {
+            var inventoryItem = await dbContext.InventoryTable.FindAsync(id);
+            if (inventoryItem == null)
+            {
+                return NotFound();
+            }
+
+            dbContext.InventoryTable.Remove(inventoryItem);
+            await dbContext.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
     }
 }
