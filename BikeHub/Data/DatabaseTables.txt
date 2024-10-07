@@ -89,3 +89,17 @@ ADD RetiredOptions VARCHAR(255) NULL;
 ALTER TABLE InventoryTable ALTER COLUMN RetiredOptions VARCHAR(255) NULL;
 
 
+
+-------------------------------------------------------
+-- Create Archived Inventory
+CREATE TABLE ArchivedInventory(
+    ArchivedItemId INT PRIMARY KEY IDENTITY(1,1),  
+    ItemId INT NOT NULL,                           
+    ItemType VARCHAR(50) NOT NULL,                 
+    ItemNumber VARCHAR(50) NOT NULL,               
+    Condition VARCHAR(50) NOT NULL,                
+    Price DECIMAL(10, 2) NOT NULL,                 
+    AvailabilityStatus VARCHAR(20) NOT NULL,       
+    Comments VARCHAR(255),                         
+    ArchivedDate DATETIME2 DEFAULT GETDATE()        
+);
