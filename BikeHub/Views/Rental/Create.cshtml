@@ -127,6 +127,28 @@
                 <input type="text" class="form-control" id="bikeRented" name="bikeRented" asp-for="BikeRented">
                 <span asp-validation-for="BikeRented" class="text-danger"></span>
             </div>
+            <!-- New AvailabilityStatus field -->
+            <div class="form-group">
+                <label for="availabilityStatus">Availability Status:</label>
+                <select class="form-control" id="availabilityStatus" name="availabilityStatus" asp-for="AvailabilityStatus">
+                    <option value="Available">Available</option>
+                    <option value="Rented">Rented</option>
+                    <option value="Damaged">Damaged</option>
+                    <option value="Retired">Retired</option>
+                </select>
+                <span asp-validation-for="AvailabilityStatus" class="text-danger"></span>
+            </div>
+
+            <!-- New PaymentMethod field -->
+            <div class="form-group">
+                <label for="paymentMethod">Payment Method:</label>
+                <select class="form-control" id="paymentMethod" name="paymentMethod" asp-for="PaymentMethod">
+                    <option value="CIBC">CIBC</option>
+                    <option value="Cash">Cash</option>
+                    <option value="N/A">N/A</option>
+                </select>
+                <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+            </div>
             <div class="form-group">
                 <label for="dateRented">Date Rented:</label>
                 <input type="date" class="form-control" id="dateRented" name="dateRented" asp-for="DateRented" value="@DateTime.Today.ToString("yyyy-MM-dd")" onchange="calculateDuration()">

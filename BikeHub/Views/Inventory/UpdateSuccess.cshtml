@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Update Successful";
+}
+
+<h2>Update Successful</h2>
+
+<div class="alert alert-success">
+    <h4>
+    <strong>Success!</strong> The inventory item has been updated successfully.!
+    </h4>
+</div>
+
+<a href="@Url.Action("Index", "Inventory")" class="btn btn-primary">Back to Inventory</a>
+
+<style>
+    .alert {
+        padding: 20px;
+        background-color: #4CAF50;
+        color: white;
+        margin-bottom: 15px;
+        border-radius: 5px;
+    }
+
+    h2 {
+        color: #333;
+    }
+</style>

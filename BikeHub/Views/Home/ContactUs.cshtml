@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "Contact Us";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    /* General styling for the contact Us form */
+    .contact-form-container {
+        max-width: 600px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        color: #343a40;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #9cbcdc;
+        border-radius: 5px;
+    }
+
+    button[type="submit"] {
+        padding: 10px 20px;
+        background-color: #33adf3;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        display: block;
+        width: 100%;
+        transition: background-color 0.3s ease;
+    }
+
+        button[type="submit"]:hover {
+            background-color: #555cdf;
+        }
+
+    .thank-you-message {
+        color: green;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 20px;
+        border:1px double;
+        background-color:aquamarine;
+    }
+</style>
+
+<div class="contact-form-container">
+    <h2>Contact Us</h2>
+
+    @if (TempData["Message"] != null)
+    {
+        <div class="thank-you-message">
+            @TempData["Message"]
+        </div>
+    }
+
+    <form asp-action="ContactUs" method="post">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+              
+        <div class="form-group">
+            <label for="message">Message:</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit">Send Message</button>
+    </form>
+</div>

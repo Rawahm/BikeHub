@@ -1,24 +1,23 @@
 ﻿@model IEnumerable<BikeHub.Models.Rental>
-
 @{
-    ViewData["Title"] = "Rental List";
+    ViewData["Title"] = "Rented Bikes List";
 }
 <head>
     <style>
-        /* Flexbox container for Sidebar and Main Content */
+        /*  container for Sidebar and Main Content */
         .container-dashboard {
-            display: flex;
-            min-height: 100vh;
+            display: flex; 
+            min-height: 100vh; 
         }
 
         /* Sidebar Styles */
         .sidebar {
-            width: 290px;
+            width: 276px;
             background-color: #003366;
-            padding: 10px;
-            height: 100vh;
-            overflow-y: auto;
-            flex-shrink: 0;
+            padding: 20px 0;
+            height: 100vh; 
+            overflow-y: auto; 
+            flex-shrink: 0; 
         }
 
             .sidebar a {
@@ -36,13 +35,11 @@
                     font-size: 22px;
                 }
 
-
-
-        /* Admin Clip Art */
+        /* Admin Clip img Art */
         .admin-image {
             padding: 20px;
             width: 80%;
-            border-radius: 39px;
+            border-radius: 33px;
             margin-bottom: 20px;
             display: block;
             margin-left: auto;
@@ -51,7 +48,7 @@
 
         /* Main Content Styles */
         .main-content {
-            flex-grow: 1;
+            flex-grow: 1; 
             padding: 40px;
             background-color: #f8f9fa;
         }
@@ -59,16 +56,16 @@
         /* Custom CSS for Rental List View */
         h1 {
             color: #333;
-            text-align: left;
+            text-align: center;
         }
 
         .table {
-            width: 100%;
+            width: 100%; 
         }
 
             .table th,
             .table td {
-                padding: 8px; /* Add padding to table cells */
+                padding: 8px; 
             }
 
         .table-striped tbody tr:nth-of-type(odd) {
@@ -80,12 +77,12 @@
         }
 
         .table thead th {
-            background-color: #003868;
-            color: #fff;
+            background-color: #0066aa;
+            color: #fff; 
         }
 
         .table-responsive {
-            overflow-x: auto;
+            overflow-x: auto; 
         }
     </style>
 </head>
@@ -116,23 +113,9 @@
                         <th>Email</th>
                         <th>Bike Rented</th>
                         <th>Date Rented</th>
-                        <th>Lock Rented</th>
-                        <th>Basket Rented</th>
-                        <th>Key Rented</th>
-                        <th>Lights</th>
                         <th>Due Date</th>
-                        <th>Date Returned</th>
                         <th>Status</th>
-                        <th>Payment Method</th>
-                        <th>Duration</th>
-                        <th>Amount</th>
-                        <th>Paid</th>
-                        <th>Payment Date</th>
-                        <th>KMs Ridden</th>
-                        <th>Method of Travel</th>
-                        <th>Days Late</th>
-                        <th>Banned</th>
-                        <th>Notes</th>
+
                     </tr>
                 </thead>
                 <tbody>
@@ -144,23 +127,9 @@
                             <td>@rental.Email</td>
                             <td>@rental.BikeRented</td>
                             <td>@rental.DateRented.ToShortDateString()</td>
-                            <td>@rental.LockRented</td>
-                            <td>@rental.BasketRented</td>
-                            <td>@rental.KeyRented</td>
-                            <td>@rental.Lights</td>
                             <td>@rental.DueDate.ToShortDateString()</td>
-                            <td>@(rental.DateReturned.ToShortDateString())</td>
                             <td>@rental.AvailabilityStatus</td>
-                            <td>@rental.PaymentMethod</td>
-                            <td>@rental.Duration</td>
-                            <td>@rental.Amount</td>
-                            <td>@(rental.Paid ? "Yes" : "No")</td>
-                            <td>@(rental.PaymentDate?.ToShortDateString())</td>
-                            <td>@rental.KMSRidden</td>
-                            <td>@rental.MethodOfTravel</td>
-                            <td>@rental.DaysLate</td>
-                            <td>@(rental.Banned ? "Yes" : "No")</td>
-                            <td>@rental.Notes</td>
+
                         </tr>
                     }
                 </tbody>

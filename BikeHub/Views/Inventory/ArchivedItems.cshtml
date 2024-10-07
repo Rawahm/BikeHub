@@ -1,0 +1,85 @@
+﻿@model IEnumerable<BikeHub.Models.ArchivedInventory>
+
+@{
+    ViewData["Title"] = "Archived Inventory";
+}
+
+<!-- Navigation Buttons! -->
+<div class="mb-3">
+    <a asp-action="Index" class="btn btn-primary">Inventory List</a>
+    <a asp-action="CreateInventory" class="btn btn-secondary">Add New Item</a>
+</div>
+<h2>Archived Inventory Items</h2>
+
+
+
+<table class="table">
+    <thead style="background-color:aliceblue">
+        <tr>
+            <th>Item ID</th>
+            <th>Item Type</th>
+            <th>Item Number</th>
+            <th>Condition</th>
+            <th>Price</th>
+            <th>Availability Status</th>
+            <th>Comments</th>
+            <th>Retired Options</th>
+            <th>Archived Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.ItemId</td>
+                <td>@item.ItemType</td>
+                <td>@item.ItemNumber</td>
+                <td>@item.Condition</td>
+                <td>@item.Price</td>
+                <td>@item.AvailabilityStatus</td>
+                <td>@item.Comments</td>
+                <td>@(item.RetiredOptions ?? "N/A")</td>
+                <td>@item.ArchivedDate</td>
+                <td>
+                    <a href="javascript:void(0);" class="btn btn-danger" onclick="deleteItem(@item.ItemId);">Delete</a>
+                    <a href="javascript:void(0);" class="btn btn-success" onclick="restoreItem(@item.ItemId);">Restore</a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function deleteItem(id) {
+        if (confirm('Are you sure you want to delete this item?')) {
+            $.ajax({
+                url: '@Url.Action("DeleteInventory", "Inventory")/' + id,
+                type: 'POST',
+                success: function () {
+                    location.reload(); // Upload the page to updates the changes
+                },
+                error: function () {
+                    alert('Error deleting item. Please try again.');
+                }
+            });
+        }
+    }
+    function restoreItem(id) {
+        if (confirm('Are you sure you want to restore this item?')) {
+            $.ajax({
+                url: '@Url.Action("RestoreInventory", "Inventory")/' + id,
+                type: 'POST',
+                success: function () {
+                    location.reload(); // Reloads the page to reflect the changes
+                },
+                error: function () {
+                    alert('Error restoring item. Please try again.');
+                }
+            });
+        }
+    }
+
+</script>

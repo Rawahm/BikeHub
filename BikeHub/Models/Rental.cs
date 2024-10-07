@@ -31,7 +31,11 @@ namespace BikeHub.Models
         public bool Banned { get; set; }
         public string? Notes { get; set; }
         public Customer? Customer { get; set; }
-      
+
+        // New attribute to track availability status
+        // To be used to check Rented Bike
+        public string AvailabilityStatus { get; set; } // "Rented",  "Retired", "Available"
+        public string PaymentMethod { get; set; }
 
 
     }

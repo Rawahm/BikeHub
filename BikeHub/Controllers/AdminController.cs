@@ -268,5 +268,12 @@ namespace BikeHub.Controllers
             return NotFound(); // Return not found status if archived customer not found
         }
 
+        // Navigate to the admin dashboard.
+        [HttpGet]
+        public IActionResult Dashboard()
+        {
+            return View("Dashboard");
+        }
+
     }
 }

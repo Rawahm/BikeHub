@@ -111,8 +111,8 @@
                 <ul>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#events">Events</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a asp-action="ViewContactMessages">View Contact Messages</a></li>
+                    <li><a href="/Home/ContactUs">Contact</a></li>
+                   
                 </ul>
             </nav>
         </div>
@@ -167,22 +167,6 @@
         </div>
     </section>
 
-    <section id="contact">
-        <div class="container">
-            <h2>Contact Us</h2>
-            @if (TempData["Message"] != null)
-            {
-                <div class="alert alert-success">
-                    @TempData["Message"]
-                </div>
-            }
-            <form asp-action="ContactUs" method="post">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <textarea name="message" placeholder="Your Message" required></textarea>
-                <button type="submit">Send Message</button>
-            </form>
-        </div>
-    </section>
+  
 </body>
 </html>
