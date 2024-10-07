@@ -100,6 +100,7 @@ CREATE TABLE ArchivedInventory(
     Condition VARCHAR(50) NOT NULL,                
     Price DECIMAL(10, 2) NOT NULL,                 
     AvailabilityStatus VARCHAR(20) NOT NULL,       
-    Comments VARCHAR(255),                         
+    Comments VARCHAR(255),        
+	RetiredOptions VARCHAR(100),
     ArchivedDate DATETIME2 DEFAULT GETDATE()        
 );
