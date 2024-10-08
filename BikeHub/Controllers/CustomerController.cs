@@ -42,9 +42,9 @@ namespace BikeHub.Controllers
                 if (viewModel.EnrollmentLetter != null)
                 {
                     var fileExtension = Path.GetExtension(viewModel.EnrollmentLetter.FileName);
-                    if (fileExtension.ToLower() != ".doc" && fileExtension.ToLower() != ".docx")
+                    if (fileExtension.ToLower() != ".pdf")
                     {
-                        ModelState.AddModelError("EnrollmentLetter", "Only .doc or .docx files are allowed.");
+                        ModelState.AddModelError("EnrollmentLetter", "Only .pdf files are allowed.");
                         return View(viewModel);
                     }
 

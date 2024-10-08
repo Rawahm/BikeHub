@@ -228,9 +228,9 @@
         <div class="form-group">
             <label for="CampusName">Campus Name:</label>
             <select id="CampusName" name="CampusName" asp-for="CampusName">
-                <option value="HMS">HMS</option>
+                <option value="HMS">HMC</option>
                 <option value="Davis">Davis</option>
-                <option value="Both HMS & Davis">Both HMS & Davis</option>
+                <option value="Both HMS & Davis">Both HMC & Davis</option>
             </select>
         </div>
         <div class="form-group">
@@ -276,8 +276,8 @@
         </div>
         <!-- File That should be upload for Enrollment Letter -->
         <div class="form-group">
-            <label for="EnrollmentLetter">Upload Enrollment Letter (.doc)</label>
-            <input type="file" id="EnrollmentLetter" name="EnrollmentLetter" accept=".doc,.docx" required>
+            <label for="EnrollmentLetter">Upload Enrollment Letter (.pdf)</label>
+            <input type="file" id="EnrollmentLetter" name="EnrollmentLetter" accept=".pdf" required>
             <span asp-validation-for="EnrollmentLetter" class="text-danger"></span>
         </div>
 
