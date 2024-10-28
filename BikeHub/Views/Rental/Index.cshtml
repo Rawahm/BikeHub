@@ -96,12 +96,12 @@
     <div class="sidebar">
         <img src="~/img/Ad2.png" alt="Admin img" class="admin-image" />
         <h4 class="text-center text-white">BikeHub Admin</h4>
-        <a href="/Admin/login">🔓Login</a>
-        <a href="/Admin/AdminList">📋 👩🏽‍💻Customer List</a>
-        <a href="/admin/inventory-list">📋🚲Inventory List</a>
-        <a href="/Rental/Index">📋🚴‍♂️Rental List</a>
-        <a href="/Home/ViewContactMessages">📨Contact Us Messages</a>
-        <a href="/Rental/ViewRentedBikes"> 🚴‍Rented Bikes</a>
+        <a asp-controller="Admin" asp-action="Login">🔓Login</a>
+        <a asp-controller="Admin" asp-action="AdminList">📋 👩🏽‍💻Customer List</a>
+        <a asp-controller="Inventory" asp-action="Index">📋🚲Inventory Management</a>
+        <a asp-controller="Rental" asp-action="Index">📋🚴‍♂️Rental List</a>
+        <a asp-controller="Home" asp-action="ViewContactMessages">📨Contact Us Messages</a>
+        <a asp-controller="Rental" asp-action="ViewRentedBikes"> 🚴‍Rented Bikes</a>
     </div>
 
     <!-- Main Content -->
