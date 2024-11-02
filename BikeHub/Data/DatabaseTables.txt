@@ -104,3 +104,83 @@ CREATE TABLE ArchivedInventory(
 	RetiredOptions VARCHAR(100),
     ArchivedDate DATETIME2 DEFAULT GETDATE()        
 );
+
+
+
+------------------------------------------------------------------------
+-- User and admin authentication tables:
+-- 1- Create AspNetUsers
+CREATE TABLE AspNetUsers (
+    Id NVARCHAR(450) NOT NULL PRIMARY KEY,
+    UserName NVARCHAR(256) UNIQUE,
+    NormalizedUserName NVARCHAR(256),
+    Email NVARCHAR(256),
+    NormalizedEmail NVARCHAR(256),
+    EmailConfirmed BIT NOT NULL DEFAULT (0),
+    PasswordHash NVARCHAR(MAX),
+    SecurityStamp NVARCHAR(MAX),
+    ConcurrencyStamp NVARCHAR(MAX),
+    PhoneNumber NVARCHAR(MAX),
+    PhoneNumberConfirmed BIT NOT NULL DEFAULT (0),
+    TwoFactorEnabled BIT NOT NULL DEFAULT (0),
+    LockoutEnd DATETIMEOFFSET,
+    LockoutEnabled BIT NOT NULL DEFAULT (1),
+    AccessFailedCount INT NOT NULL DEFAULT (0)
+);
+
+
+
+*******************************************************
+--2-  Create AspNetRoles
+CREATE TABLE AspNetRoles (
+    Id NVARCHAR(450) NOT NULL PRIMARY KEY,
+    Name NVARCHAR(256) UNIQUE,
+    NormalizedName NVARCHAR(256),
+    ConcurrencyStamp NVARCHAR(MAX)
+);
+
+************************************************************
+--3-  Create AspNetUserRoles
+CREATE TABLE AspNetUserRoles (
+    UserId NVARCHAR(450) NOT NULL,
+    RoleId NVARCHAR(450) NOT NULL,
+    PRIMARY KEY (UserId, RoleId),
+    FOREIGN KEY (UserId) REFERENCES AspNetUsers(Id) ON DELETE CASCADE,
+    FOREIGN KEY (RoleId) REFERENCES AspNetRoles(Id) ON DELETE CASCADE
+);
+****************************************************************
+-- 4- Create AspNetUserClaims
+
+CREATE TABLE AspNetUserClaims (
+    Id INT NOT NULL PRIMARY KEY IDENTITY,
+    UserId NVARCHAR(450) NOT NULL,
+    ClaimType NVARCHAR(MAX),
+    ClaimValue NVARCHAR(MAX),
+    FOREIGN KEY (UserId) REFERENCES AspNetUsers(Id) ON DELETE CASCADE
+);
+**********************************************************************
+
+-- 5- Create AspNetUserLogins
+CREATE TABLE AspNetUserLogins (
+    LoginProvider NVARCHAR(128) NOT NULL,
+    ProviderKey NVARCHAR(128) NOT NULL,
+    ProviderDisplayName NVARCHAR(256),
+    UserId NVARCHAR(450) NOT NULL,
+    PRIMARY KEY (LoginProvider, ProviderKey),
+    FOREIGN KEY (UserId) REFERENCES AspNetUsers(Id) ON DELETE CASCADE
+);
+**********************************************************************
+
+--6 - Create AspNetRoleClaims
+CREATE TABLE AspNetRoleClaims (
+    Id INT NOT NULL PRIMARY KEY IDENTITY,
+    RoleId NVARCHAR(450) NOT NULL,
+    ClaimType NVARCHAR(MAX),
+    ClaimValue NVARCHAR(MAX),
+    FOREIGN KEY (RoleId) REFERENCES AspNetRoles(Id) ON DELETE CASCADE
+);
+****************************************
+-- Optional step: insert data to the AspNetRoles table::
+INSERT INTO AspNetRoles (Id, Name, NormalizedName)
+VALUES (NEWID(), 'Admin', 'ADMIN'),
+       (NEWID(), 'User', 'USER');
