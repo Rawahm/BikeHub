@@ -1,9 +1,11 @@
 ﻿using BikeHub.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace BikeHub.Data
 {
-    public class BikeHubDBContext : DbContext
+    public class BikeHubDBContext : IdentityDbContext<IdentityUser>
     {
         public BikeHubDBContext(DbContextOptions options) : base(options)
         {
