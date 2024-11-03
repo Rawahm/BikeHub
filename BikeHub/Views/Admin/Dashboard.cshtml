@@ -6,17 +6,30 @@
 
 <style>
     .container {
-        display: flex;
+        display: flex; /* Use flexbox for layout */
     }
+
+    .logout-button {
+        margin-left: 10px;
+        text-decoration: none;
+        background: none;
+        border: none;
+        color: darkblue;
+        cursor: pointer;
+    }
+
+        .logout-button:hover {
+            text-decoration: underline;
+        }
 
     /* Sidebar Styles */
     .sidebar {
         width: 257px;
         background-color: darkblue;
         padding: 20px 0;
-        height: 80vh;
+        height: 80vh; /* Full height for sidebar */
         display: grid;
-        overflow-y: auto;
+        overflow-y: auto; /* Scroll if content exceeds height */
     }
 
         .sidebar a {
@@ -53,14 +66,14 @@
         color: #ffffff;
         padding: 10px;
         position: fixed;
-        width: 100%;
+        width: 100%; /* make navbar full width on page */
         top: 0;
-        z-index: 2; 
+        z-index: 2; /* keep it on the top of other content */
     }
     /* Sidebar Styles */
     .sidebar {
         width: 290px;
-        background-color: #003366;
+        background-color: #003366; /* Dark blue for professionalism */
         padding: 20px;
         height: 100vh;
         display: flex;
@@ -68,22 +81,23 @@
         color: white;
     }
 
-    /* Admin  img from Clip Art */
+    /* Admin Clip Art */
     .admin-image {
-        padding: 20px;
-        width: 80%; 
-        border-radius: 35px; 
-        margin-bottom: 1px;
+        padding: 22px;
+        width: 80%; /* Adjust size as needed, make it a bit larger */
+        border-radius: 33px; /* Slightly rounded corners */
+        margin-bottom: 1px; /* Space below image */
         margin-top: 7px;
         display: block;
         max-width: 100%;
         height: auto;
-        margin-left:25px;
+        margin-right: auto;
+        margin-left: auto;
     }
 
 </style>
 
-<!-- Navbar
+<!-- Navbar -->
 <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
     <div class="container-fluid">
 
@@ -102,12 +116,21 @@
                     <a class="nav-link text-dark" asp-area="" asp-controller="Admin" asp-action="Dashboard">Admin Dashboard</a>
                 </li>
             </ul>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <form method="post" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="~/">
+                    <button type="submit" class="btn btn-link navbar-text logout-button">Logout</button>
+                </form>
+                <span class="navbar-text me-7">Hi, @User.Identity.Name</span>
+
+            }
+
+
         </div>
     </div>
 </nav>
- -->
-<!--  Container for Sidebar and Main Content -->
-<!--    This  contianer used to let both elements aligen beside each other-->
+
+<!-- Flexbox Container for Sidebar and Main Content -->
 <div class="container">
     <!-- Sidebar -->
     <div class="sidebar">
@@ -117,19 +140,30 @@
         <p></p>
         <img src="~/img/Ad2.png" alt="Admin img" class="admin-image" />
         <h4 class="text-center text-white">BikeHub Admin</h4>
-        <a asp-controller="Admin" asp-action="Login">🔓Login</a>
+        <a asp-area="Identity" asp-page="/Account/Login">🔓 Login</a>
         <a asp-controller="Admin" asp-action="AdminList">📋 👩🏽‍💻Customer List</a>
         <a asp-controller="Inventory" asp-action="Index">📋🚲Inventory Management</a>
         <a asp-controller="Rental" asp-action="Index">📋🚴‍♂️Rental List</a>
         <a asp-controller="Home" asp-action="ViewContactMessages">📨Contact Us Messages</a>
         <a asp-controller="Rental" asp-action="ViewRentedBikes"> 🚴‍Rented Bikes</a>
+
     </div>
 
     <!-- Main Content -->
     <div class="main-content">
-        <p style="color:blueviolet"> --Show When Admin Successflly login--</p>
         <h1>Welcome to the Admin Dashboard</h1>
+        <hr /><br />
+        <p></p>
+        <h5><span style="color:cadetblue" class="navbar-text me-7">You Logedin as @User.Identity.Name </span></h5>
+        <p></p>
+        <p></p>
+
+        
         <p>Select an option from the sidebar to manage BikeHub's services.</p>
+
+        <a asp-controller="Admin" asp-action="ResetUserPassword" class="reset-password-link">🔑 Reset Password</a>
+
+
     </div>
 </div>
 
