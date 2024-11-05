@@ -19,9 +19,11 @@ namespace BikeHub.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Customer> CustomerInformation = _db.CustomerInformation.ToList();
+            // IEnumerable<Customer> CustomerInformation = _db.CustomerInformation.ToList();
 
-            return View(CustomerInformation);
+            //return View(CustomerInformation);
+            var pageContents = _db.PageContent.ToList(); // Retrieve content from the database
+            return View(pageContents); // Pass the content to the view
         }
 
         public IActionResult About()

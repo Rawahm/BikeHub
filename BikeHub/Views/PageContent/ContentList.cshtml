@@ -1,0 +1,80 @@
+﻿@model IEnumerable<BikeHub.Models.PageContent>
+
+<h2>Content List</h2>
+<div class="table-container">
+    <table class="styled-table">
+        
+        <thead>
+            <tr>
+                <th>Page Name</th>
+                <th>Section Name</th>
+                <th>Content</th>
+                <th>Last Updated</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var content in Model)
+            {
+                <tr>
+                    <td>@content.PageName</td>
+                    <td>@content.SectionName</td>
+                    <td>@content.Content</td>
+                    <td>@content.LastUpdated.ToString("g")</td>
+                    <td>
+                        <a asp-action="ManageContent" asp-route-id="@content.Id" class="action-link">Edit</a> |
+<a asp-action="Delete" asp-route-id="@content.Id">Delete</a>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .table-container {
+        width: 90%;
+        margin: 20px auto;
+        overflow-x: auto;
+    }
+
+    .styled-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 16px;
+    }
+
+        .styled-table thead tr {
+            background-color: #6291f8;
+            color: #ffffff;
+            text-align: left;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+        }
+
+        .styled-table tbody tr:nth-child(even) {
+            background-color: #f3f3f3;
+        }
+
+        .styled-table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+    .action-link {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+        .action-link:hover {
+            text-decoration: underline;
+        }
+
+    .delete {
+        color: #d9534f;
+    }
+</style>

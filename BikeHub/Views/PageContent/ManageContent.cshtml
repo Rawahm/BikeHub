@@ -1,0 +1,32 @@
+﻿@model BikeHub.Models.PageContentViewModel
+
+@{
+    ViewData["Title"] = "Manage Content";
+}
+
+<h2>Manage Page Content</h2>
+
+<form asp-action="ManageContent" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="SelectedPageName">Page Name</label>
+        <select asp-for="SelectedPageName" class="form-control" asp-items="@(new SelectList(Model.PageNames))">
+            <option value="">-- Select Page --</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SelectedSectionName">Section Name</label>
+        <select asp-for="SelectedSectionName" class="form-control" asp-items="@(new SelectList(Model.SectionNames))">
+            <option value="">-- Select Section --</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Content">Content</label>
+        <textarea asp-for="Content" class="form-control" rows="5"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
