@@ -1,5 +1,8 @@
-﻿@{
+﻿@model IEnumerable<BikeHub.Models.PageContent>
+
+@{
     ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
 }
 
 <!DOCTYPE html>
@@ -149,6 +152,25 @@
                 <p>"Their repair service is really good. The bike has never been in better shape!"</p>
                 <p>- Jack S.</p>
             </div>
+        </div>
+    </section>
+    <section id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            @if (Model != null && Model.Any())
+            {
+                foreach (var mo in Model)
+                {
+                    <div class="section">
+                        <h3>@mo.SectionName</h3>
+                        <p>@mo.Content</p>
+                    </div>
+                }
+            }
+            else
+            {
+                <p>No content available to display.</p>
+            }
         </div>
     </section>
 
