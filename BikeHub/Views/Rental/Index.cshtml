@@ -149,7 +149,7 @@
                             <td>@rental.KeyRented</td>
                             <td>@rental.Lights</td>
                             <td>@rental.DueDate.ToShortDateString()</td>
-                            <td>@(rental.DateReturned.ToShortDateString())</td>
+                            <td>@(rental.DateReturned?.ToShortDateString())</td>
                             <td>@rental.AvailabilityStatus</td>
                             <td>@rental.PaymentMethod</td>
                             <td>@rental.Duration</td>

@@ -20,7 +20,7 @@ namespace BikeHub.Models
         public string? KeyRented { get; set; }
         public string? Lights { get; set; }
         public DateTime DueDate { get; set; }
-        public DateTime DateReturned { get; set; }
+        public DateTime? DateReturned { get; set; }
         public int Duration { get; set; }
         public decimal Amount { get; set; }
         public bool Paid { get; set; }

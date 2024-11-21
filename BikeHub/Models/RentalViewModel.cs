@@ -37,7 +37,7 @@ namespace BikeHub.Models
         public DateTime DueDate { get; set; }
 
         [DataType(DataType.Date, ErrorMessage = "Invalid date format.")]
-        public DateTime DateReturned { get; set; }
+        public DateTime? DateReturned { get; set; }
 
         [Required(ErrorMessage = "Duration is required.")]
         [Range(0, int.MaxValue, ErrorMessage = "Value must be greater than or equal to 0.")]
