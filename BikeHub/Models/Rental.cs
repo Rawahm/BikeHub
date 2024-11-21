@@ -36,6 +36,8 @@ namespace BikeHub.Models
         // To be used to check Rented Bike
         public string AvailabilityStatus { get; set; } // "Rented",  "Retired", "Available"
         public string PaymentMethod { get; set; }
+        public string CampusName { get; set; } 
+
 
 
     }

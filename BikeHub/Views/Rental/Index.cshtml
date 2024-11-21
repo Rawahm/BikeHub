@@ -102,6 +102,8 @@
         <a asp-controller="Rental" asp-action="Index">📋🚴‍♂️Rental List</a>
         <a asp-controller="Home" asp-action="ViewContactMessages">📨Contact Us Messages</a>
         <a asp-controller="Rental" asp-action="ViewRentedBikes"> 🚴‍Rented Bikes</a>
+        <a asp-controller="Reports" asp-action="GenerateReport">📊 Reports</a>
+
     </div>
 
     <!-- Main Content -->
@@ -131,6 +133,7 @@
                         <th>KMs Ridden</th>
                         <th>Method of Travel</th>
                         <th>Days Late</th>
+                        <th>Campus Name</th>
                         <th>Banned</th>
                         <th>Notes</th>
                     </tr>
@@ -159,6 +162,7 @@
                             <td>@rental.KMSRidden</td>
                             <td>@rental.MethodOfTravel</td>
                             <td>@rental.DaysLate</td>
+                            <td>@rental.CampusName</td>
                             <td>@(rental.Banned ? "Yes" : "No")</td>
                             <td>@rental.Notes</td>
                         </tr>

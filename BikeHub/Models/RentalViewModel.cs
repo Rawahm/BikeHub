@@ -71,5 +71,7 @@ namespace BikeHub.Models
 
         [Required(ErrorMessage = "Notes are required.")]
         public string Notes { get; set; }
+        public string CampusName { get; set; }
+
     }
 }
