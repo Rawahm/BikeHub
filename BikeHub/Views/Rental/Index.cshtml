@@ -136,6 +136,7 @@
                         <th>Campus Name</th>
                         <th>Banned</th>
                         <th>Notes</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -165,6 +166,8 @@
                             <td>@rental.CampusName</td>
                             <td>@(rental.Banned ? "Yes" : "No")</td>
                             <td>@rental.Notes</td>
+                            <td> <a asp-action="Edit" asp-route-id="@rental.Id" class="btn btn-link">Edit</a></td>
+
                         </tr>
                     }
                 </tbody>

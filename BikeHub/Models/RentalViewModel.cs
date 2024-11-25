@@ -55,7 +55,7 @@ namespace BikeHub.Models
         public bool Paid { get; set; }
 
         [DataType(DataType.Date, ErrorMessage = "Invalid date format.")]
-        public DateTime PaymentDate { get; set; }
+        public DateTime? PaymentDate { get; set; }
 
         [Required(ErrorMessage = "KMs ridden is required.")]
         [Range(0, int.MaxValue, ErrorMessage = "KMs ridden must be greater than or equal to 0.")]
@@ -66,12 +66,12 @@ namespace BikeHub.Models
         [Range(0, int.MaxValue, ErrorMessage = "Days must be greater than or equal to 0.")]
 
         public int DaysLate { get; set; }
+        public string CampusName { get; set; }
 
         public bool Banned { get; set; }
 
         [Required(ErrorMessage = "Notes are required.")]
         public string Notes { get; set; }
-        public string CampusName { get; set; }
 
     }
 }

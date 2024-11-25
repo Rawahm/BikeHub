@@ -111,7 +111,10 @@
                             <th>Banned</th>
                             <th>Paid</th>
                             <th>Notes</th>
+                            <th>| Action</th>
                             <th>&nbsp;</th>
+                            <th>&nbsp;</th>
+
 
                         </tr>
                     </thead>
@@ -140,9 +143,13 @@
                                 <td>@rental.Notes</td>
                                 <td>
                                     <form asp-action="DeleteRental" asp-route-id="@rental.Id" method="post" onsubmit="return confirm('Are you sure you want to delete this rental?');">
-                                        <button type="submit" class="btn btn-link">Delete</button>
+                                        <button type="submit" class="btn btn-danger">Delete</button>
                                     </form>
                                 </td>
+                                        <td>
+            <a asp-action="Edit" asp-route-id="@rental.Id" class="btn btn-warning">Edit</a>
+        </td>
+
 
 
                             </tr>
