@@ -45,8 +45,8 @@ namespace BikeHub.Controllers
             return View(rentalViewModel);
         }
         //This the method shown during the sprint 2. 
-         // This create method  added to validate the saving of the records Another commented create method
-         // without any form validation 
+        // This create method  added to validate the saving of the records Another commented create method
+        // without any form validation 
         public async Task<IActionResult> Create(RentalViewModel model)
         {
             try
@@ -244,6 +244,96 @@ namespace BikeHub.Controllers
                 .ToList();
 
             return View(rentedBikes); // Pass rented bikes to the view
+        }
+        // GET: /Rental/Edit/Id
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            // Fetch the rental record by ID
+            var rental = dbContext.Rental.FirstOrDefault(r => r.Id == id);
+            if (rental == null)
+            {
+                return NotFound();
+            }
+
+            // Convert the rental entity to the RentalViewModel
+            var viewModel = new RentalViewModel
+            {
+                Id = rental.Id,
+                StudentId = rental.StudentId,
+                Name = rental.Name,
+                Email = rental.Email,
+                BikeRented = rental.BikeRented,
+                AvailabilityStatus = rental.AvailabilityStatus,
+                PaymentMethod = rental.PaymentMethod,
+                DateRented = rental.DateRented,
+                DueDate = rental.DueDate,
+                LockRented = rental.LockRented,
+                BasketRented = rental.BasketRented,
+                KeyRented = rental.KeyRented,
+                Lights = rental.Lights,
+                Duration = rental.Duration,
+                Amount = rental.Amount,
+                KMSRidden = rental.KMSRidden,
+                MethodOfTravel = rental.MethodOfTravel,
+                PaymentDate = rental.PaymentDate,
+                DateReturned = rental.DateReturned,
+                DaysLate = rental.DaysLate,
+                CampusName = rental.CampusName,
+                Banned = rental.Banned,
+                Paid = rental.Paid,
+                Notes = rental.Notes
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async  Task<IActionResult> Edit(RentalViewModel rentalViewModel)
+        {
+            var rental = await dbContext.Rental.FindAsync(rentalViewModel.Id);
+            if(rental is not null)
+            { 
+            
+
+
+                // Update the rental record
+                // rental.StudentId = model.StudentId;
+                // rental.Name = model.Name;
+                rental.Email = rentalViewModel.Email;
+                rental.BikeRented = rentalViewModel.BikeRented;
+                rental.AvailabilityStatus = rentalViewModel.AvailabilityStatus;
+                rental.PaymentMethod = rentalViewModel.PaymentMethod;
+                rental.DateRented = rentalViewModel.DateRented;
+                rental.DueDate = rentalViewModel.DueDate;
+                rental.LockRented = rentalViewModel.LockRented;
+                rental.BasketRented = rentalViewModel.BasketRented;
+                rental.KeyRented = rentalViewModel.KeyRented;
+                rental.Lights = rentalViewModel.Lights;
+                rental.Duration = rentalViewModel.Duration;
+                rental.Amount = rentalViewModel.Amount;
+                rental.KMSRidden = rentalViewModel.KMSRidden;
+                rental.MethodOfTravel = rentalViewModel.MethodOfTravel;
+                rental.PaymentDate = rentalViewModel.PaymentDate;
+                rental.DateReturned = rentalViewModel.DateReturned;
+                rental.DaysLate = rentalViewModel.DaysLate;
+                rental.CampusName = rentalViewModel.CampusName;
+                rental.Banned = rentalViewModel.Banned;
+                rental.Paid = rentalViewModel.Paid;
+                rental.Notes = rentalViewModel.Notes;
+                
+                // Save the changes to the database!!
+
+                await dbContext.SaveChangesAsync();
+                Console.WriteLine("Saving changes.!!..");
+              
+                // Redirect back to the rental list -- All lists of rental!!!
+                return RedirectToAction(nameof(Index));
+            }
+
+            // If the model is not valid, return the view with the current data
+            return View(rentalViewModel);
         }
     }
 }

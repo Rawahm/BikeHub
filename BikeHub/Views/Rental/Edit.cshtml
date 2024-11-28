@@ -1,0 +1,246 @@
+﻿@model BikeHub.Models.RentalViewModel
+
+@{
+    ViewData["Title"] = "Edit Rental";
+}
+
+<style>
+
+    form {
+        max-width: 500px;
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #666;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+        color: #333;
+    }
+
+    select {
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="%23333"><path d="M7 10l5 5 5-5H7z"/></svg>');
+        background-repeat: no-repeat;
+        background-position-x: 97%;
+        background-position-y: 50%;
+        padding-right: 40px;
+    }
+
+    button[type="submit"] {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+    /* Style for checkboxes */
+    input[type="checkbox"] {
+        margin-right: 5px;
+        vertical-align: middle;
+    }
+
+    .checkbox-label {
+        display: inline-block;
+        font-size: 14px;
+        color: #666;
+    }
+
+</style>
+
+<h2>Edit Rental</h2>
+
+<form asp-action="Edit" method="post">
+    <div class="form-group">
+        <label asp-for="StudentId" class="control-label"></label>
+        <input asp-for="StudentId" class="form-control" readonly/>
+        <span asp-validation-for="StudentId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Name" class="control-label"></label>
+        <input asp-for="Name" class="form-control" readonly />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BikeRented" class="control-label"></label>
+        <input asp-for="BikeRented" class="form-control" />
+        <span asp-validation-for="BikeRented" class="text-danger"></span>
+    </div>
+
+    <!-- AvailabilityStatus Dropdown -->
+    <div class="form-group">
+        <label asp-for="AvailabilityStatus" class="control-label"></label>
+        <select asp-for="AvailabilityStatus" class="form-control">
+            <option value="Available">Available</option>
+            <option value="Unavailable">Unavailable</option>
+        </select>
+        <span asp-validation-for="AvailabilityStatus" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="PaymentMethod" class="control-label"></label>
+        <input asp-for="PaymentMethod" class="form-control" />
+        <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DateRented" class="control-label"></label>
+        <input asp-for="DateRented" class="form-control" type="date" />
+        <span asp-validation-for="DateRented" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DueDate" class="control-label"></label>
+        <input asp-for="DueDate" class="form-control" type="date" />
+        <span asp-validation-for="DueDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="LockRented" class="control-label"></label>
+        <input asp-for="LockRented" class="form-control" />
+        <span asp-validation-for="LockRented" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="BasketRented" class="control-label"></label>
+        <input asp-for="BasketRented" class="form-control" />
+        <span asp-validation-for="BasketRented" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="KeyRented" class="control-label"></label>
+        <input asp-for="KeyRented" class="form-control" />
+        <span asp-validation-for="KeyRented" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Lights" class="control-label"></label>
+        <input asp-for="Lights" class="form-control" />
+        <span asp-validation-for="Lights" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Duration" class="control-label"></label>
+        <input asp-for="Duration" class="form-control" />
+        <span asp-validation-for="Duration" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Amount" class="control-label"></label>
+        <input asp-for="Amount" class="form-control" />
+        <span asp-validation-for="Amount" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="KMSRidden" class="control-label"></label>
+        <input asp-for="KMSRidden" class="form-control" />
+        <span asp-validation-for="KMSRidden" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MethodOfTravel" class="control-label"></label>
+        <input asp-for="MethodOfTravel" class="form-control" />
+        <span asp-validation-for="MethodOfTravel" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PaymentDate" class="control-label"></label>
+        <input asp-for="PaymentDate" class="form-control" type="date" />
+        <span asp-validation-for="PaymentDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DateReturned" class="control-label"></label>
+        <input asp-for="DateReturned" class="form-control" type="date" />
+        <span asp-validation-for="DateReturned" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="DaysLate" class="control-label"></label>
+        <input asp-for="DaysLate" class="form-control" />
+        <span asp-validation-for="DaysLate" class="text-danger"></span>
+    </div>
+
+    <!-- CampusName Dropdown -->
+    <div class="form-group">
+        <label asp-for="CampusName" class="control-label"></label>
+        <select asp-for="CampusName" class="form-control">
+            <option value="HMC">HMC</option>
+            <option value="Davis">Davis</option>
+        </select>
+        <span asp-validation-for="CampusName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="checkbox" id="banned" name="banned" asp-for="Banned">
+        <label for="banned" class="checkbox-label">Banned:</label>
+        <span asp-validation-for="Banned" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="checkbox" id="paid" name="paid" asp-for="Paid">
+        <label for="paid" class="checkbox-label">Paid:</label>
+        <span asp-validation-for="Paid" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Notes" class="control-label"></label>
+        <textarea asp-for="Notes" class="form-control"></textarea>
+        <span asp-validation-for="Notes" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

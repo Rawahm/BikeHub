@@ -102,6 +102,8 @@
         <a asp-controller="Rental" asp-action="Index">📋🚴‍♂️Rental List</a>
         <a asp-controller="Home" asp-action="ViewContactMessages">📨Contact Us Messages</a>
         <a asp-controller="Rental" asp-action="ViewRentedBikes"> 🚴‍Rented Bikes</a>
+        <a asp-controller="Reports" asp-action="GenerateReport">📊 Reports</a>
+
     </div>
 
     <!-- Main Content -->
@@ -131,8 +133,10 @@
                         <th>KMs Ridden</th>
                         <th>Method of Travel</th>
                         <th>Days Late</th>
+                        <th>Campus Name</th>
                         <th>Banned</th>
                         <th>Notes</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -149,7 +153,7 @@
                             <td>@rental.KeyRented</td>
                             <td>@rental.Lights</td>
                             <td>@rental.DueDate.ToShortDateString()</td>
-                            <td>@(rental.DateReturned.ToShortDateString())</td>
+                            <td>@(rental.DateReturned?.ToShortDateString())</td>
                             <td>@rental.AvailabilityStatus</td>
                             <td>@rental.PaymentMethod</td>
                             <td>@rental.Duration</td>
@@ -159,8 +163,11 @@
                             <td>@rental.KMSRidden</td>
                             <td>@rental.MethodOfTravel</td>
                             <td>@rental.DaysLate</td>
+                            <td>@rental.CampusName</td>
                             <td>@(rental.Banned ? "Yes" : "No")</td>
                             <td>@rental.Notes</td>
+                            <td> <a asp-action="Edit" asp-route-id="@rental.Id" class="btn btn-link">Edit</a></td>
+
                         </tr>
                     }
                 </tbody>
