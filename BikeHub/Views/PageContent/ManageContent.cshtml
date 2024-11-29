@@ -13,7 +13,7 @@
         <div class="form-group">
         <label asp-for="SelectedPageName">Page Name</label>
         <select asp-for="SelectedPageName" class="form-control" asp-items="@(new SelectList(Model.PageNames))">
-            <option value="">-- Select Page --</option>
+            <option value="">Select Page </option>
         </select>
     </div>
 
@@ -39,3 +39,95 @@
         allowedContent: false, 
         removePlugins: 'sourcearea' 
     });</script>
+
+    <style>
+    /* General Page Styling */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+        color: #333;
+    }
+
+    .page-title {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+        color: #2c3e50;
+    }
+
+    .content-form-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 2rem;
+        background: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .content-form {
+        margin-top: 1rem;
+    }
+
+    .form-label {
+        font-weight: bold;
+        color: #2c3e50;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.5rem;
+        font-size: 1rem;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .styled-select {
+        background-color: #f4f4f4;
+        border: 1px solid #ddd;
+        color: #2c3e50;
+        transition: 0.3s ease-in-out;
+    }
+
+    .styled-select:focus {
+        border-color: #2980b9;
+        outline: none;
+    }
+
+    .styled-input {
+        border: 1px solid #ddd;
+        color: #2c3e50;
+        transition: 0.3s ease-in-out;
+    }
+
+    .styled-input:focus {
+        border-color: #16a085;
+        outline: none;
+    }
+
+    .styled-textarea {
+        min-height: 150px;
+        resize: vertical;
+        font-family: Arial, sans-serif;
+        font-size: 1rem;
+    }
+
+    .custom-btn {
+        background-color: #2980b9;
+        border: none;
+        color: #fff;
+        padding: 0.5rem 1.5rem;
+        font-size: 1rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .custom-btn:hover {
+        background-color: #21618c;
+    }
+</style>
