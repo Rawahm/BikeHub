@@ -164,8 +164,13 @@
         
         <p>Select an option from the sidebar to manage BikeHub's services.</p>
 
-        <a asp-controller="Account" asp-action="ForgotPassword" class="reset-password-link">🔑 Reset Password</a>
+        <a asp-controller="Account" asp-action="ForgotPassword" class="btn btn-info">🔑 Reset Password</a>
+        <p>
 
+        </p>
+        <form method="post" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="~/">
+            <button type="submit" class="btn btn-info"> &nbsp;&nbsp; &nbsp; &nbsp;🔐   Logout &nbsp;&nbsp; &nbsp; &nbsp;</button>
+        </form>
 
     </div>
 </div>

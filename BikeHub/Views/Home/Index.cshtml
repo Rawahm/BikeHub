@@ -156,20 +156,22 @@
     </section>
     <section id="about">
         <div class="container">
-            <h2>About Us</h2>
+            <h2>Updates and Coming Events:</h2>
             @if (Model != null && Model.Any())
             {
                 foreach (var mo in Model)
                 {
                     <div class="section">
+
                         <h3>@mo.SectionName</h3>
-                        <p>@mo.Content</p>
+                        @Html.Raw(@mo.Content)
+
                     </div>
                 }
             }
             else
             {
-                <p>No content available to display.</p>
+                <p>Navigate to add content display or update this section!.</p>
             }
         </div>
     </section>

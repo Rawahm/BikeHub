@@ -8,7 +8,7 @@
         public string Content { get; set; }
 
         // Dropdown List options
-        public List<string> PageNames { get; set; } = new List<string> { "Home", "AboutUs", "ContactUs" };
-        public List<string> SectionNames { get; set; } = new List<string> { "Header", "Body", "Footer" };
+        public List<string> PageNames { get; set; } = new List<string> { "Home", "AboutUs" };
+        public List<string> SectionNames { get; set; } = new List<string> { "Events", "About", "New" };
     }
 }

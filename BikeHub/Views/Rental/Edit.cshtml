@@ -86,7 +86,7 @@
 
 </style>
 
-<h2>Edit Rental</h2>
+<h1 style="color:royalblue">Edit Rental</h1>
 
 <form asp-action="Edit" method="post">
     <div class="form-group">
@@ -103,7 +103,7 @@
 
     <div class="form-group">
         <label asp-for="Email" class="control-label"></label>
-        <input asp-for="Email" class="form-control" />
+        <input asp-for="Email" class="form-control" readonly/>
         <span asp-validation-for="Email" class="text-danger"></span>
     </div>
 

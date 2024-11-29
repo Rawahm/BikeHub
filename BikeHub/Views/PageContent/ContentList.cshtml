@@ -7,7 +7,7 @@
         <thead>
             <tr>
                 <th>Page Name</th>
-                <th>Section Name</th>
+                <th>Title</th>
                 <th>Content</th>
                 <th>Last Updated</th>
                 <th>Actions</th>
@@ -19,7 +19,7 @@
                 <tr>
                     <td>@content.PageName</td>
                     <td>@content.SectionName</td>
-                    <td>@content.Content</td>
+                    <td>@Html.Raw(@content.Content)</td>
                     <td>@content.LastUpdated.ToString("g")</td>
                     <td>
                         <a asp-action="ManageContent" asp-route-id="@content.Id" class="action-link">Edit</a> |

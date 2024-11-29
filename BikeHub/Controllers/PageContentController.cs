@@ -64,7 +64,7 @@ namespace BikeHub.Controllers
                 }
                 else
                 {
-                    // Update existing entry
+                    // Update existing content
                     pageContent = dbContext.PageContent.Find(model.Id);
                     if (pageContent != null)
                     {
@@ -113,6 +113,92 @@ namespace BikeHub.Controllers
             }
             return View("Index"); // Redirect to the main content list page
         }
+        public IActionResult AboutUs()
+        {
+            var pageContents = dbContext.PageContent
+                                        .Where(pc => pc.PageName == "AboutUs")
+                                        .ToList();
+            return View(pageContents);
+        }
+        [HttpGet]
+        public IActionResult UpdateHomePage()
+        {
+            var content = dbContext.PageContent
+                .FirstOrDefault(p => p.PageName == "Home");
 
+            ViewBag.Content = content?.Content ?? string.Empty;
+
+            return View();
+        }
+
+        [HttpPost]
+        public  IActionResult UpdateHomePage(string content)
+        {
+            var pageContent = dbContext.PageContent
+                .FirstOrDefault(p => p.PageName == "Home");
+
+            if (pageContent == null)
+            {
+                return NotFound("Home page content not found.");
+            }
+
+            pageContent.Content = content;
+            pageContent.LastUpdated = DateTime.Now;
+
+            dbContext.SaveChanges();
+
+            TempData["SuccessMessage"] = "Home page updated successfully!";
+            return RedirectToAction("ContentList");
+        }
+
+        [HttpGet]
+        public IActionResult UpdateAboutUsPage()
+        {
+            var content = dbContext.PageContent
+                .FirstOrDefault(p => p.PageName == "AboutUs");
+
+            ViewBag.Content = content?.Content ?? string.Empty;
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult UpdateAboutUsPage(string content, IFormFile imageFile)
+        {
+            var pageContent = dbContext.PageContent
+                .FirstOrDefault(p => p.PageName == "AboutUs");
+
+            if (pageContent == null)
+            {
+                return NotFound("About Us page content not found.");
+            }
+
+            if (imageFile != null && imageFile.Length > 0)
+            {
+                var uploadsPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                Directory.CreateDirectory(uploadsPath);
+
+                var fileName = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
+                var filePath = Path.Combine(uploadsPath, fileName);
+
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    imageFile.CopyTo(stream);
+                }
+
+                // Append the image to the content
+                content += $"<img src='/images/{fileName}' alt='About Us Image' />";
+            }
+
+            pageContent.Content = content;
+            pageContent.LastUpdated = DateTime.Now;
+
+            dbContext.SaveChanges();
+
+            TempData["SuccessMessage"] = "About Us page updated successfully!";
+            return RedirectToAction("UpdateContent");
+        }
     }
+
+
 }

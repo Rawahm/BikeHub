@@ -1,6 +1,7 @@
 using BikeHub.Data;
 using BikeHub.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace BikeHub.Controllers
@@ -22,13 +23,17 @@ namespace BikeHub.Controllers
             // IEnumerable<Customer> CustomerInformation = _db.CustomerInformation.ToList();
 
             //return View(CustomerInformation);
-            var pageContents = _db.PageContent.ToList(); // Retrieve content from the database
+            var pageContents = _db.PageContent.Where(pc => pc.PageName == "Home")
+                              .ToList(); // Retrieve content from the database only when selected page is "Home "
             return View(pageContents); // Pass the content to the view
         }
 
         public IActionResult About()
         {
-            return View();
+            var pageContents = _db.PageContent
+                              .Where(pc => pc.PageName == "AboutUs") //Retrieve content from the database only when selected page is "AboutUs "
+                              .ToList();
+            return View(pageContents);
         }
         [HttpPost]
         public async Task<IActionResult> ContactUs(string name, string email, string message)

@@ -287,7 +287,7 @@ namespace BikeHub.Controllers
 
             return View(viewModel);
         }
-
+        // Rental/Edit/Id
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async  Task<IActionResult> Edit(RentalViewModel rentalViewModel)
@@ -326,13 +326,14 @@ namespace BikeHub.Controllers
                 // Save the changes to the database!!
 
                 await dbContext.SaveChangesAsync();
+                // Testing
                 Console.WriteLine("Saving changes.!!..");
               
                 // Redirect back to the rental list -- All lists of rental!!!
                 return RedirectToAction(nameof(Index));
             }
 
-            // If the model is not valid, return the view with the current data
+            // If the model is not valid, return the view with the same data-- Not working! 
             return View(rentalViewModel);
         }
     }
