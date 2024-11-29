@@ -5,8 +5,8 @@
 
 <div>
     <p><strong>Page Name:</strong> @Model.PageName</p>
-    <p><strong>Section Name:</strong> @Model.SectionName</p>
-    <p><strong>Content:</strong> @Model.Content</p>
+    <p><strong>Title Name:</strong> @Model.SectionName</p>
+    <p><strong>Content:</strong> @Html.Raw(@Model.Content)</p>
 </div>
 
 <form asp-action="Delete" asp-route-id="@Model.Id" method="post">

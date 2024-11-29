@@ -1,4 +1,6 @@
-﻿@{
+﻿
+@model IEnumerable<BikeHub.Models.PageContent>
+@{
     ViewData["Title"] = "";
 }
 <style>
@@ -59,7 +61,7 @@
     @{
         ViewData["Title"] = "About Us";
     }
-
+    
     <div class="container mt-5">
         <div class="row">
             <div class="col-md-6">
@@ -88,3 +90,24 @@
         </div>
     </div>
 </div>
+<section id="about">
+    <div class="container">
+        <h2>Updates and Coming Events:</h2>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var mo in Model)
+            {
+                <div class="section">
+
+                    <h3>@mo.SectionName</h3>
+                    @Html.Raw(@mo.Content)
+
+                </div>
+            }
+        }
+        else
+        {
+            <p>Navigate to add content to display or update this section!.</p>
+        }
+    </div>
+</section>

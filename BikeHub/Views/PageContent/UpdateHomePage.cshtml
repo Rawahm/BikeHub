@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Update Home Page";
+}
+
+<h2>Update Home Page</h2>
+
+<form method="post" action="/PageContent/UpdateHomePage">
+    <div>
+        <label for="contentEditor">Content:</label>
+
+        <textarea id="contentEditor" name="content">@ViewBag.Content</textarea>
+    </div>
+    <div>
+        <button type="submit">Save Changes</button>
+    </div>
+</form>
+
+<script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+<script>
+    // Initialize CKEditor
+    CKEDITOR.replace('contentEditor', {
+        allowedContent: false, 
+        removePlugins: 'sourcearea' 
+    });</script>
