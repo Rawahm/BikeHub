@@ -17,6 +17,7 @@ builder.Services.AddDbContext<BikeHubDBContext>(options => options.UseSqlServer(
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BikeHubDBContext>();
 
+builder.Services.AddScoped<CustomerRepository>();
 
 builder.Services.AddScoped<RentalRepository>();
 

@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Generate Reports";
+}
+
+<h1>Generate Reports</h1>
+
+<div class="report-buttons">
+    <button class="btn btn-primary" onclick="location.href='@Url.Action("GenerateReport", "Reports")'">Generate Rental Report</button>
+    <button class="btn btn-primary" onclick="location.href='@Url.Action("CustomerReport", "Reports")'">Generate Customer Report</button>
+    <button class="btn btn-primary" onclick="location.href='@Url.Action("InventoryReport", "Reports")'">Generate Inventory Report</button>
+</div>
+
+<style>
+    .report-buttons {
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 300px;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+    }
+</style>
