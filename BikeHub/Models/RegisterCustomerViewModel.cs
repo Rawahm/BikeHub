@@ -35,7 +35,7 @@ namespace BikeHub.Models
 
         [Range(typeof(bool), "true", "true", ErrorMessage = "You must agree to the terms and conditions.")]
         public bool TAndCAgreement { get; set; }
-        public IFormFile EnrollmentLetter { get; set; }
+        public IFormFile? EnrollmentLetter { get; set; }
 
         public bool EmailSubscription { get; set; }
     }

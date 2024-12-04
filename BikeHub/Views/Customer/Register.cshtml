@@ -277,8 +277,9 @@
         <!-- File That should be upload for Enrollment Letter -->
         <div class="form-group">
             <label for="EnrollmentLetter">Upload Enrollment Letter (.pdf)</label>
-            <input type="file" id="EnrollmentLetter" name="EnrollmentLetter" accept=".pdf" required>
-            <span asp-validation-for="EnrollmentLetter" class="text-danger"></span>
+            <input type="file" name="EnrollmentLetter" id="EnrollmentLetter" />
+
+            <!-- <span asp-validation-for="EnrollmentLetter" class="text-danger"></span>-->
         </div>
 
         <div class="form-group">

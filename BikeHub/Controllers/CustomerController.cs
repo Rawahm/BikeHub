@@ -32,13 +32,14 @@ namespace BikeHub.Controllers
         {
             if (ModelState.IsValid)
             {
-                /* Handle Wavier agreement..*/
+                // Handle Waiver agreement
                 if (!viewModel.TAndCAgreement)
                 {
                     ModelState.AddModelError("TAndCAgreement", "You must agree to the terms and conditions.");
-                    return View(viewModel); // return the view with the  error
+                    return View(viewModel); // Return the view with the error
                 }
-                // Handle File Upload
+
+                // Handle File Upload if EnrollmentLetter is provided
                 if (viewModel.EnrollmentLetter != null)
                 {
                     var fileExtension = Path.GetExtension(viewModel.EnrollmentLetter.FileName);
@@ -76,7 +77,6 @@ namespace BikeHub.Controllers
                     TAndCAgreement = viewModel.TAndCAgreement,
                     EmailSubscription = viewModel.EmailSubscription
                 };
-
 
                 await dbContext.CustomerInformation.AddAsync(customer);
                 await dbContext.SaveChangesAsync();
