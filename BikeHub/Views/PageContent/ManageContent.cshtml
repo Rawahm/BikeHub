@@ -32,13 +32,44 @@
 
     <button type="submit" class="btn btn-primary">Save</button>
 </form>
-<script src="https://cdn.ckeditor.com/4.21.0/standard/ckeditor.js"></script>
+
+<!---->
+<script src="https://cdn.ckeditor.com/4.22.0/standard/ckeditor.js"></script>
 <script>
     // Initialize CKEditor
     CKEDITOR.replace('contentEditor', {
-        allowedContent: false, 
-        removePlugins: 'sourcearea' 
-    });</script>
+        allowedContent: false
+    });
+    CKEDITOR.create(document.querySelector('#contentEditor'), {
+        toolbar: [
+            'bold', 'italic', 'underline', 'fontColor', 'fontBackgroundColor', 'undo', 'redo'
+        ],
+        fontColor: {
+            colors: [
+                { color: 'hsl(0, 0%, 0%)', label: 'Black' },
+                { color: 'hsl(0, 75%, 60%)', label: 'Red' },
+                { color: 'hsl(30, 75%, 60%)', label: 'Orange' },
+                { color: 'hsl(60, 75%, 60%)', label: 'Yellow' },
+                { color: 'hsl(120, 75%, 60%)', label: 'Green' },
+                { color: 'hsl(180, 75%, 60%)', label: 'Cyan' },
+                { color: 'hsl(240, 75%, 60%)', label: 'Blue' },
+                { color: 'hsl(300, 75%, 60%)', label: 'Purple' }
+            ]
+        },
+        fontBackgroundColor: {
+            colors: [
+                { color: 'hsl(0, 0%, 100%)', label: 'White' },
+                { color: 'hsl(0, 0%, 90%)', label: 'Light Gray' },
+                { color: 'hsl(0, 0%, 70%)', label: 'Gray' },
+                { color: 'hsl(0, 75%, 60%)', label: 'Light Red' },
+                { color: 'hsl(120, 75%, 60%)', label: 'Light Green' }
+            ]
+        }
+    }).catch(error => {
+        console.error(error);
+    });
+
+    </script>
 
     <style>
     /* General Page Styling */

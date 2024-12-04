@@ -7,8 +7,8 @@ using OfficeOpenXml;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Set the LicenseContext globally for EPPlus
-ExcelPackage.LicenseContext = LicenseContext.Commercial;  // Or LicenseContext.NonCommercial
+// Set the LicenseContext globally for EPPlus -- Foe Excel sheet export for Reports!
+ExcelPackage.LicenseContext = LicenseContext.Commercial;  
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -17,8 +17,11 @@ builder.Services.AddDbContext<BikeHubDBContext>(options => options.UseSqlServer(
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<BikeHubDBContext>();
 
+builder.Services.AddScoped<CustomerRepository>();
 
 builder.Services.AddScoped<RentalRepository>();
+
+builder.Services.AddScoped<InventoryRepository>();
 
 
 var app = builder.Build();
