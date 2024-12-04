@@ -1,16 +1,20 @@
 ﻿using BikeHub.Data;
 using BikeHub.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BikeHub.Controllers
 {
 
-   /*
-    * @Author , Date
-    * Created By: Rawah Almesri 
-    *  Sat Oct 5,2024
-    */
+    /*
+     * @Author , Date
+     * Created By: Rawah Almesri 
+     *  Sat Oct 5,2024
+     */
+
+    [Authorize]
+
     public class InventoryController : Controller
     {
         private readonly BikeHubDBContext dbContext;

@@ -1,5 +1,6 @@
 ﻿using BikeHub.Models;
 using BikeHub.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 
@@ -13,6 +14,8 @@ using OfficeOpenXml;
 
 namespace BikeHub.Controllers
 {
+    [Authorize]
+
     public class ReportsController : Controller
     {
         private readonly RentalRepository _rentalRepository;

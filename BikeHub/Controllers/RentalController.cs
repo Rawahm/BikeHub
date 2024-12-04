@@ -1,5 +1,6 @@
 ﻿using BikeHub.Data;
 using BikeHub.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 /*
@@ -10,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BikeHub.Controllers
 {
+    [Authorize]
+
     public class RentalController : Controller
     {
         private readonly BikeHubDBContext dbContext;
