@@ -11,7 +11,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BikeHub.Controllers
 {
-    [Authorize]
 
     public class RentalController : Controller
     {
